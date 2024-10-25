@@ -58,13 +58,33 @@ namespace Microsoft.Maui.Devices
 		protected override DisplayInfo GetMainDisplayInfo()
 		{
 			if (WindowStateManager.Default.GetActiveAppWindow(false) is not AppWindow appWindow)
+			{
 				return default;
+
+/* Unmerged change from project 'Essentials(net7.0-windows10.0.20348)'
+Before:
+			var vDevMode = new DEVMODE();
+			EnumDisplaySettings(mi.Value.DeviceNameToLPTStr(), -1, ref vDevMode);
+
+			var w = vDevMode.dmPelsWidth;
+			var h = vDevMode.dmPelsHeight;
+
+			var dpi = (double)GetDpiForWindow(windowHandle);
+After:
+			}
+
+			var windowHandle = UI.Win32Interop.GetWindowFromWindowId(appWindow.Id);
+			var mi = GetDisplay(windowHandle);
+*/
+			}
 
 			var windowHandle = UI.Win32Interop.GetWindowFromWindowId(appWindow.Id);
 			var mi = GetDisplay(windowHandle);
 
 			if (mi == null)
+			{
 				return default;
+			}
 
 			var vDevMode = new DEVMODE();
 			EnumDisplaySettings(mi.Value.DeviceNameToLPTStr(), -1, ref vDevMode);
@@ -73,7 +93,10 @@ namespace Microsoft.Maui.Devices
 			var h = vDevMode.dmPelsHeight;
 
 			var dpi = (double)GetDpiForWindow(windowHandle);
-			if (dpi != 0)
+			if (mi == null)
+
+/* Unmerged change from project 'Essentials(net7.0-windows10.0.20348)'
+Before:
 				dpi /= DeviceDisplay.BaseLogicalDpi;
 			else
 				dpi = 1.0;
@@ -125,6 +148,134 @@ namespace Microsoft.Maui.Devices
 			if (e.MessageId == PlatformMethods.MessageIds.WM_DISPLAYCHANGE ||
 				e.MessageId == PlatformMethods.MessageIds.WM_DPICHANGED)
 				OnMainDisplayInfoChanged();
+After:
+			{
+				return default;
+			}
+
+			var vDevMode = new DEVMODE();
+			EnumDisplaySettings(mi.Value.DeviceNameToLPTStr(), -1, ref vDevMode);
+
+			var w = vDevMode.dmPelsWidth;
+			var h = vDevMode.dmPelsHeight;
+
+			var dpi = (double)GetDpiForWindow(windowHandle);
+			if (dpi != 0)
+			{
+				dpi /= DeviceDisplay.BaseLogicalDpi;
+			}
+			else
+			{
+				dpi = 1.0;
+			}
+
+			var displayOrientation = GetDisplayOrientation(vDevMode);
+			var rotation = CalculateRotation(displayOrientation);
+
+			var orientation = displayOrientation == DisplayOrientations.Landscape || displayOrientation == DisplayOrientations.LandscapeFlipped
+				? DisplayOrientation.Landscape
+				: DisplayOrientation.Portrait;
+
+			return new DisplayInfo(
+				width: w,
+				height: h,
+				density: dpi,
+				orientation: orientation,
+				rotation: rotation,
+				rate: vDevMode.dmDisplayFrequency);
+		}
+
+		static MONITORINFOEX? GetDisplay(IntPtr hwnd)
+		{
+			IntPtr hMonitor;
+			RECT rc;
+			GetWindowRect(hwnd, out rc);
+			hMonitor = MonitorFromRect(ref rc, MonitorOptions.MONITOR_DEFAULTTONEAREST);
+
+			MONITORINFOEX mi = new MONITORINFOEX();
+			mi.Size = Marshal.SizeOf(mi);
+			bool success = GetMonitorInfo(hMonitor, ref mi);
+			if (success)
+			{
+				return mi;
+			}
+			return null;
+		}
+
+		protected override void StartScreenMetricsListeners() =>
+			MainThread.BeginInvokeOnMainThread(_activeWindowTracker.Start);
+
+		protected override void StopScreenMetricsListeners() =>
+			MainThread.BeginInvokeOnMainThread(_activeWindowTracker.Stop);
+
+		// Currently there isn't a way to detect Orientation Changes unless you subclass the WinUI.Window and watch the messages.
+		// This is the "subtlest" way to currently wire this together.
+		// Hopefully there will be a more public API for this down the road so we can just use that directly from Essentials
+		void OnWindowMessage(object? sender, WindowMessageEventArgs e)
+		{
+			if (e.MessageId == PlatformMethods.MessageIds.WM_DISPLAYCHANGE ||
+				e.MessageId == PlatformMethods.MessageIds.WM_DPICHANGED)
+			{
+				OnMainDisplayInfoChanged();
+			}
+*/
+			{
+				dpi /= DeviceDisplay.BaseLogicalDpi;
+			}
+			else
+			{
+				dpi = 1.0;
+			}
+
+			var displayOrientation = GetDisplayOrientation(vDevMode);
+			var rotation = CalculateRotation(displayOrientation);
+
+			var orientation = displayOrientation == DisplayOrientations.Landscape || displayOrientation == DisplayOrientations.LandscapeFlipped
+				? DisplayOrientation.Landscape
+				: DisplayOrientation.Portrait;
+
+			return new DisplayInfo(
+				width: w,
+				height: h,
+				density: dpi,
+				orientation: orientation,
+				rotation: rotation,
+				rate: vDevMode.dmDisplayFrequency);
+		}
+
+		static MONITORINFOEX? GetDisplay(IntPtr hwnd)
+		{
+			IntPtr hMonitor;
+			RECT rc;
+			GetWindowRect(hwnd, out rc);
+			hMonitor = MonitorFromRect(ref rc, MonitorOptions.MONITOR_DEFAULTTONEAREST);
+
+			MONITORINFOEX mi = new MONITORINFOEX();
+			mi.Size = Marshal.SizeOf(mi);
+			bool success = GetMonitorInfo(hMonitor, ref mi);
+			if (success)
+			{
+				return mi;
+			}
+			return null;
+		}
+
+		protected override void StartScreenMetricsListeners() =>
+			MainThread.BeginInvokeOnMainThread(_activeWindowTracker.Start);
+
+		protected override void StopScreenMetricsListeners() =>
+			MainThread.BeginInvokeOnMainThread(_activeWindowTracker.Stop);
+
+		// Currently there isn't a way to detect Orientation Changes unless you subclass the WinUI.Window and watch the messages.
+		// This is the "subtlest" way to currently wire this together.
+		// Hopefully there will be a more public API for this down the road so we can just use that directly from Essentials
+		void OnWindowMessage(object? sender, WindowMessageEventArgs e)
+		{
+			if (e.MessageId == PlatformMethods.MessageIds.WM_DISPLAYCHANGE ||
+				e.MessageId == PlatformMethods.MessageIds.WM_DPICHANGED)
+			{
+				OnMainDisplayInfoChanged();
+			}
 		}
 
 		static DisplayRotation CalculateRotation(DisplayOrientations orientation) =>
@@ -199,7 +350,9 @@ namespace Microsoft.Maui.Devices
 
 				var index = 0;
 				foreach (char c in DeviceName.ToCharArray())
+				{
 					lptArray[index++] = Convert.ToByte(c);
+				}
 
 				lptArray[index] = Convert.ToByte('\0');
 

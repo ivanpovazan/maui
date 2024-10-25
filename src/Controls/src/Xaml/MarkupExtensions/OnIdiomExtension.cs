@@ -31,11 +31,283 @@ namespace Microsoft.Maui.Controls.Xaml
 				&& Desktop == null
 				&& TV == null
 				&& Watch == null)
+			{
 				throw new XamlParseException("OnIdiomExtension requires a non-null value to be specified for at least one idiom or Default.", serviceProvider);
+			}
 
 			var valueProvider = serviceProvider?.GetService<IProvideValueTarget>() ?? throw new ArgumentException();
 
 			BindableProperty bp;
+
+/* Unmerged change from project 'Controls.Xaml(net8.0)'
+Before:
+			if (exception != null)
+				throw exception;
+			return ret;
+		}
+
+		object GetValue()
+		{
+			if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+				return Phone ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Tablet)
+				return Tablet ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+				return Desktop ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.TV)
+				return TV ?? Default;
+After:
+			if (valueProvider.TargetObject is Setter setter)
+			{
+				bp = setter.Property;
+			}
+			else
+			{
+				bp = valueProvider.TargetProperty as BindableProperty;
+				pi = valueProvider.TargetProperty as PropertyInfo;
+			}
+			propertyType = bp?.ReturnType
+							  ?? pi?.PropertyType
+							  ?? throw new InvalidOperationException("Cannot determine property to provide the value for.");
+
+			var value = GetValue();
+			if (value == null && propertyType.IsValueType)
+			{
+				return Activator.CreateInstance(propertyType);
+			}
+
+			if (Converter != null)
+			{
+				return Converter.Convert(value, propertyType, ConverterParameter, CultureInfo.CurrentUICulture);
+			}
+
+			var converterProvider = serviceProvider?.GetService<IValueConverterProvider>();
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-ios)'
+Before:
+			if (exception != null)
+				throw exception;
+			return ret;
+		}
+
+		object GetValue()
+		{
+			if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+				return Phone ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Tablet)
+				return Tablet ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+				return Desktop ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.TV)
+				return TV ?? Default;
+After:
+			if (valueProvider.TargetObject is Setter setter)
+			{
+				bp = setter.Property;
+			}
+			else
+			{
+				bp = valueProvider.TargetProperty as BindableProperty;
+				pi = valueProvider.TargetProperty as PropertyInfo;
+			}
+			propertyType = bp?.ReturnType
+							  ?? pi?.PropertyType
+							  ?? throw new InvalidOperationException("Cannot determine property to provide the value for.");
+
+			var value = GetValue();
+			if (value == null && propertyType.IsValueType)
+			{
+				return Activator.CreateInstance(propertyType);
+			}
+
+			if (Converter != null)
+			{
+				return Converter.Convert(value, propertyType, ConverterParameter, CultureInfo.CurrentUICulture);
+			}
+
+			var converterProvider = serviceProvider?.GetService<IValueConverterProvider>();
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-maccatalyst)'
+Before:
+			if (exception != null)
+				throw exception;
+			return ret;
+		}
+
+		object GetValue()
+		{
+			if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+				return Phone ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Tablet)
+				return Tablet ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+				return Desktop ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.TV)
+				return TV ?? Default;
+After:
+			if (valueProvider.TargetObject is Setter setter)
+			{
+				bp = setter.Property;
+			}
+			else
+			{
+				bp = valueProvider.TargetProperty as BindableProperty;
+				pi = valueProvider.TargetProperty as PropertyInfo;
+			}
+			propertyType = bp?.ReturnType
+							  ?? pi?.PropertyType
+							  ?? throw new InvalidOperationException("Cannot determine property to provide the value for.");
+
+			var value = GetValue();
+			if (value == null && propertyType.IsValueType)
+			{
+				return Activator.CreateInstance(propertyType);
+			}
+
+			if (Converter != null)
+			{
+				return Converter.Convert(value, propertyType, ConverterParameter, CultureInfo.CurrentUICulture);
+			}
+
+			var converterProvider = serviceProvider?.GetService<IValueConverterProvider>();
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-android)'
+Before:
+			if (exception != null)
+				throw exception;
+			return ret;
+		}
+
+		object GetValue()
+		{
+			if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+				return Phone ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Tablet)
+				return Tablet ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+				return Desktop ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.TV)
+				return TV ?? Default;
+After:
+			if (valueProvider.TargetObject is Setter setter)
+			{
+				bp = setter.Property;
+			}
+			else
+			{
+				bp = valueProvider.TargetProperty as BindableProperty;
+				pi = valueProvider.TargetProperty as PropertyInfo;
+			}
+			propertyType = bp?.ReturnType
+							  ?? pi?.PropertyType
+							  ?? throw new InvalidOperationException("Cannot determine property to provide the value for.");
+
+			var value = GetValue();
+			if (value == null && propertyType.IsValueType)
+			{
+				return Activator.CreateInstance(propertyType);
+			}
+
+			if (Converter != null)
+			{
+				return Converter.Convert(value, propertyType, ConverterParameter, CultureInfo.CurrentUICulture);
+			}
+
+			var converterProvider = serviceProvider?.GetService<IValueConverterProvider>();
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-windows10.0.19041)'
+Before:
+			if (exception != null)
+				throw exception;
+			return ret;
+		}
+
+		object GetValue()
+		{
+			if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+				return Phone ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Tablet)
+				return Tablet ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+				return Desktop ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.TV)
+				return TV ?? Default;
+After:
+			if (valueProvider.TargetObject is Setter setter)
+			{
+				bp = setter.Property;
+			}
+			else
+			{
+				bp = valueProvider.TargetProperty as BindableProperty;
+				pi = valueProvider.TargetProperty as PropertyInfo;
+			}
+			propertyType = bp?.ReturnType
+							  ?? pi?.PropertyType
+							  ?? throw new InvalidOperationException("Cannot determine property to provide the value for.");
+
+			var value = GetValue();
+			if (value == null && propertyType.IsValueType)
+			{
+				return Activator.CreateInstance(propertyType);
+			}
+
+			if (Converter != null)
+			{
+				return Converter.Convert(value, propertyType, ConverterParameter, CultureInfo.CurrentUICulture);
+			}
+
+			var converterProvider = serviceProvider?.GetService<IValueConverterProvider>();
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-windows10.0.20348)'
+Before:
+			if (exception != null)
+				throw exception;
+			return ret;
+		}
+
+		object GetValue()
+		{
+			if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+				return Phone ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Tablet)
+				return Tablet ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+				return Desktop ?? Default;
+			if (DeviceInfo.Idiom == DeviceIdiom.TV)
+				return TV ?? Default;
+After:
+			if (valueProvider.TargetObject is Setter setter)
+			{
+				bp = setter.Property;
+			}
+			else
+			{
+				bp = valueProvider.TargetProperty as BindableProperty;
+				pi = valueProvider.TargetProperty as PropertyInfo;
+			}
+			propertyType = bp?.ReturnType
+							  ?? pi?.PropertyType
+							  ?? throw new InvalidOperationException("Cannot determine property to provide the value for.");
+
+			var value = GetValue();
+			if (value == null && propertyType.IsValueType)
+			{
+				return Activator.CreateInstance(propertyType);
+			}
+
+			if (Converter != null)
+			{
+				return Converter.Convert(value, propertyType, ConverterParameter, CultureInfo.CurrentUICulture);
+			}
+
+			var converterProvider = serviceProvider?.GetService<IValueConverterProvider>();
+*/
 			PropertyInfo pi = null;
 			Type propertyType = null;
 
@@ -53,11 +325,18 @@ namespace Microsoft.Maui.Controls.Xaml
 							  ?? throw new InvalidOperationException("Cannot determine property to provide the value for.");
 
 			var value = GetValue();
+			PropertyInfo pi = null;
+			Type propertyType = null;
+
 			if (value == null && propertyType.IsValueType)
+			{
 				return Activator.CreateInstance(propertyType);
+			}
 
 			if (Converter != null)
+			{
 				return Converter.Convert(value, propertyType, ConverterParameter, CultureInfo.CurrentUICulture);
+			}
 
 			var converterProvider = serviceProvider?.GetService<IValueConverterProvider>();
 			if (converterProvider != null)
@@ -65,7 +344,9 @@ namespace Microsoft.Maui.Controls.Xaml
 				MemberInfo minforetriever()
 				{
 					if (pi != null)
+					{
 						return pi;
+					}
 
 					MemberInfo minfo = null;
 					try
@@ -77,7 +358,10 @@ namespace Microsoft.Maui.Controls.Xaml
 						throw new XamlParseException($"Multiple properties with name '{bp.DeclaringType}.{bp.PropertyName}' found.", serviceProvider, innerException: e);
 					}
 					if (minfo != null)
+					{
 						return minfo;
+					}
+
 					try
 					{
 						return bp.DeclaringType.GetRuntimeMethod("Get" + bp.PropertyName, new[] { typeof(BindableObject) });
@@ -91,26 +375,46 @@ namespace Microsoft.Maui.Controls.Xaml
 				return converterProvider.Convert(value, propertyType, minforetriever, serviceProvider);
 			}
 			if (converterProvider != null)
+			{
 				return converterProvider.Convert(value, propertyType, () => pi, serviceProvider);
+			}
 
 			var ret = value.ConvertTo(propertyType, () => pi, serviceProvider, out Exception exception);
 			if (exception != null)
+			{
 				throw exception;
+			}
+
 			return ret;
 		}
 
 		object GetValue()
 		{
 			if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+			{
 				return Phone ?? Default;
+			}
+
 			if (DeviceInfo.Idiom == DeviceIdiom.Tablet)
+			{
 				return Tablet ?? Default;
+			}
+
 			if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+			{
 				return Desktop ?? Default;
+			}
+
 			if (DeviceInfo.Idiom == DeviceIdiom.TV)
+			{
 				return TV ?? Default;
+			}
+
 			if (DeviceInfo.Idiom == DeviceIdiom.Watch)
+			{
 				return Watch ?? Default;
+			}
+
 			return Default;
 		}
 	}

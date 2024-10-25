@@ -196,9 +196,41 @@ namespace Microsoft.Maui.DeviceTests
 				var foundTreeElement = nestedChild.GetVisualTreeElement(searchAncestors);
 
 				if (searchAncestors)
+
+/* Unmerged change from project 'Controls.DeviceTests(net8.0-maccatalyst)'
+Before:
 					Assert.Equal(viewToLocate, foundTreeElement);
+After:
+				{
+					Assert.Equal(viewToLocate, foundTreeElement);
+				}
+*/
+
+/* Unmerged change from project 'Controls.DeviceTests(net8.0-windows10.0.19041)'
+Before:
+					Assert.Equal(viewToLocate, foundTreeElement);
+After:
+				{
+					Assert.Equal(viewToLocate, foundTreeElement);
+				}
+*/
+
+/* Unmerged change from project 'Controls.DeviceTests(net8.0-windows10.0.20348)'
+Before:
+					Assert.Equal(viewToLocate, foundTreeElement);
+After:
+				{
+					Assert.Equal(viewToLocate, foundTreeElement);
+				}
+*/
+				{
+					Assert.Equal(viewToLocate, foundTreeElement);
+				}
 				else
+				{
+				{
 					Assert.Null(foundTreeElement);
+				}
 			});
 		}
 

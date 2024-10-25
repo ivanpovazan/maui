@@ -65,7 +65,11 @@ namespace Microsoft.Maui
 			{
 				_isVisible = value;
 				if (IsPlatformViewInitialized)
+				{
+				{
 					Invalidate();
+				}
+				}
 			}
 		}
 
@@ -80,9 +84,14 @@ namespace Microsoft.Maui
 		public void Draw(ICanvas canvas, RectF dirtyRect)
 		{
 			if (!IsVisible)
+			{
 				return;
+			}
+
 			foreach (var drawable in _windowElements)
+			{
 				drawable.Draw(canvas, dirtyRect);
+			}
 		}
 
 		public virtual bool Deinitialize()
@@ -95,7 +104,9 @@ namespace Microsoft.Maui
 		public virtual bool AddWindowElement(IWindowOverlayElement drawable)
 		{
 			if (drawable == null)
+			{
 				throw new ArgumentNullException(nameof(drawable));
+			}
 
 			var result = _windowElements.Add(drawable);
 			Invalidate();
@@ -106,7 +117,9 @@ namespace Microsoft.Maui
 		public virtual bool RemoveWindowElement(IWindowOverlayElement drawable)
 		{
 			if (drawable == null)
+			{
 				throw new ArgumentNullException(nameof(drawable));
+			}
 
 			var result = _windowElements.Remove(drawable);
 			Invalidate();
@@ -143,7 +156,9 @@ namespace Microsoft.Maui
 			{
 				var visualWindow = Window as IVisualTreeElement;
 				if (visualWindow != null)
+				{
 					elements.AddRange(visualWindow.GetVisualTreeElements(point));
+				}
 			}
 
 			Tapped?.Invoke(this, new WindowOverlayTappedEventArgs(point, elements, windowElements));

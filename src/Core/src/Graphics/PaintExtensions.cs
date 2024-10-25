@@ -8,6 +8,9 @@ namespace Microsoft.Maui.Graphics
 		public static Color? ToColor(this Paint? paint)
 		{
 			if (paint is SolidPaint solidPaint)
+
+/* Unmerged change from project 'Core(net8.0)'
+Before:
 				return solidPaint.Color;
 
 			if (paint is GradientPaint gradientPaint)
@@ -15,9 +18,104 @@ namespace Microsoft.Maui.Graphics
 
 			if (paint is ImagePaint)
 				return null;
+After:
+			{
+				return solidPaint.Color;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-ios)'
+Before:
+				return solidPaint.Color;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint.GradientStops?[0]?.Color;
+
+			if (paint is ImagePaint)
+				return null;
+After:
+			{
+				return solidPaint.Color;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-maccatalyst)'
+Before:
+				return solidPaint.Color;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint.GradientStops?[0]?.Color;
+
+			if (paint is ImagePaint)
+				return null;
+After:
+			{
+				return solidPaint.Color;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-android)'
+Before:
+				return solidPaint.Color;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint.GradientStops?[0]?.Color;
+
+			if (paint is ImagePaint)
+				return null;
+After:
+			{
+				return solidPaint.Color;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-windows10.0.19041)'
+Before:
+				return solidPaint.Color;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint.GradientStops?[0]?.Color;
+
+			if (paint is ImagePaint)
+				return null;
+After:
+			{
+				return solidPaint.Color;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-windows10.0.20348)'
+Before:
+				return solidPaint.Color;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint.GradientStops?[0]?.Color;
+
+			if (paint is ImagePaint)
+				return null;
+After:
+			{
+				return solidPaint.Color;
+			}
+*/
+			{
+				return solidPaint.Color;
+			}
+
+			if (paint is GradientPaint gradientPaint)
+			{
+				return gradientPaint.GradientStops?[0]?.Color;
+			}
+
+			if (paint is ImagePaint)
+			{
+				return null;
+			}
 
 			if (paint is PatternPaint)
+			{
 				return null;
+			}
 
 			return null;
 		}
@@ -25,6 +123,9 @@ namespace Microsoft.Maui.Graphics
 		public static bool IsNullOrEmpty([NotNullWhen(true)] this Paint? paint)
 		{
 			if (paint is SolidPaint solidPaint)
+
+/* Unmerged change from project 'Core(net8.0)'
+Before:
 				return solidPaint == null || solidPaint.Color == null;
 
 			if (paint is GradientPaint gradientPaint)
@@ -32,9 +133,104 @@ namespace Microsoft.Maui.Graphics
 
 			if (paint is ImagePaint imagePaint)
 				return imagePaint == null || imagePaint.Image == null;
+After:
+			{
+				return solidPaint == null || solidPaint.Color == null;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-ios)'
+Before:
+				return solidPaint == null || solidPaint.Color == null;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint == null || gradientPaint.GradientStops.Length == 0;
+
+			if (paint is ImagePaint imagePaint)
+				return imagePaint == null || imagePaint.Image == null;
+After:
+			{
+				return solidPaint == null || solidPaint.Color == null;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-maccatalyst)'
+Before:
+				return solidPaint == null || solidPaint.Color == null;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint == null || gradientPaint.GradientStops.Length == 0;
+
+			if (paint is ImagePaint imagePaint)
+				return imagePaint == null || imagePaint.Image == null;
+After:
+			{
+				return solidPaint == null || solidPaint.Color == null;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-android)'
+Before:
+				return solidPaint == null || solidPaint.Color == null;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint == null || gradientPaint.GradientStops.Length == 0;
+
+			if (paint is ImagePaint imagePaint)
+				return imagePaint == null || imagePaint.Image == null;
+After:
+			{
+				return solidPaint == null || solidPaint.Color == null;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-windows10.0.19041)'
+Before:
+				return solidPaint == null || solidPaint.Color == null;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint == null || gradientPaint.GradientStops.Length == 0;
+
+			if (paint is ImagePaint imagePaint)
+				return imagePaint == null || imagePaint.Image == null;
+After:
+			{
+				return solidPaint == null || solidPaint.Color == null;
+			}
+*/
+
+/* Unmerged change from project 'Core(net8.0-windows10.0.20348)'
+Before:
+				return solidPaint == null || solidPaint.Color == null;
+
+			if (paint is GradientPaint gradientPaint)
+				return gradientPaint == null || gradientPaint.GradientStops.Length == 0;
+
+			if (paint is ImagePaint imagePaint)
+				return imagePaint == null || imagePaint.Image == null;
+After:
+			{
+				return solidPaint == null || solidPaint.Color == null;
+			}
+*/
+			{
+				return solidPaint == null || solidPaint.Color == null;
+			}
+
+			if (paint is GradientPaint gradientPaint)
+			{
+				return gradientPaint == null || gradientPaint.GradientStops.Length == 0;
+			}
+
+			if (paint is ImagePaint imagePaint)
+			{
+				return imagePaint == null || imagePaint.Image == null;
+			}
 
 			if (paint is PatternPaint patternPaint)
+			{
 				return patternPaint == null || patternPaint.Pattern == null;
+			}
 
 			return paint == null;
 		}
@@ -42,7 +238,9 @@ namespace Microsoft.Maui.Graphics
 		internal static bool IsTransparent(this Paint? paint)
 		{
 			if (paint is SolidPaint solidPaint)
+			{
 				return solidPaint.Color == Colors.Transparent;
+			}
 
 			return false;
 		}

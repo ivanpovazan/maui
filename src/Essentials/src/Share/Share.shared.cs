@@ -107,10 +107,14 @@ namespace Microsoft.Maui.ApplicationModel.DataTransfer
 		public Task RequestAsync(ShareTextRequest request)
 		{
 			if (request == null)
+			{
 				throw new ArgumentNullException(nameof(request));
+			}
 
 			if (string.IsNullOrEmpty(request.Text) && string.IsNullOrEmpty(request.Uri))
+			{
 				throw new ArgumentException($"Both the {nameof(request.Text)} and {nameof(request.Uri)} are invalid. Make sure to include at least one of them in the request.");
+			}
 
 			return PlatformRequestAsync(request);
 		}
@@ -121,10 +125,14 @@ namespace Microsoft.Maui.ApplicationModel.DataTransfer
 		public Task RequestAsync(ShareFileRequest request)
 		{
 			if (request == null)
+			{
 				throw new ArgumentNullException(nameof(request));
+			}
 
 			if (request.File == null)
+			{
 				throw new ArgumentException(FileNullException(nameof(request.File)));
+			}
 
 			return PlatformRequestAsync(request);
 		}
@@ -135,13 +143,152 @@ namespace Microsoft.Maui.ApplicationModel.DataTransfer
 		public Task RequestAsync(ShareMultipleFilesRequest request)
 		{
 			if (request == null)
+
+/* Unmerged change from project 'Essentials(net8.0)'
+Before:
 				throw new ArgumentNullException(nameof(request));
 
 			if (!(request.Files?.Count > 0))
 				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net8.0-ios)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net8.0-maccatalyst)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net8.0-android)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net8.0-windows10.0.19041)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net8.0-windows10.0.20348)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net7.0)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net7.0-ios)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net7.0-maccatalyst)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net7.0-android)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net7.0-windows10.0.19041)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+
+/* Unmerged change from project 'Essentials(net7.0-windows10.0.20348)'
+Before:
+				throw new ArgumentNullException(nameof(request));
+
+			if (!(request.Files?.Count > 0))
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+After:
+			{
+				throw new ArgumentNullException(nameof(request));
+*/
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+			}
+
+			if (!(request.Files?.Count > 0))
+			{
+				throw new ArgumentException(FileNullException(nameof(request.Files)));
+			}
 
 			if (request.Files.Any(file => file == null))
+			{
 				throw new ArgumentException(FileNullException(nameof(request.Files)));
+			}
 
 			return PlatformRequestAsync(request);
 		}

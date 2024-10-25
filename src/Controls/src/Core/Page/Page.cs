@@ -90,6 +90,9 @@ namespace Microsoft.Maui.Controls
 
 			//if things were added in base ctor (through implicit styles), the items added aren't properly parented
 			if (InternalChildren.Count > 0)
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
 				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
 
 			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
@@ -266,6 +269,1182 @@ namespace Microsoft.Maui.Controls
 		public Task DisplayAlert(string title, string message, string cancel)
 		{
 			return DisplayAlert(title, message, null, cancel, FlowDirection.MatchParent);
+After:
+			{
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+			}
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+		}
+
+		void IPaddingElement.OnPaddingPropertyChanged(Thickness oldValue, Thickness newValue)
+		{
+			UpdateChildrenLayout();
+		}
+
+		/// <summary>
+		/// Gets or sets the page's title.
+		/// </summary>
+		/// <remarks>For example, this title might be shown in the flyout menu or a tab bar together with <see cref="IconImageSource"/>.</remarks>
+		public string Title
+		{
+			get { return (string)GetValue(TitleProperty); }
+			set { SetValue(TitleProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the <see cref="ToolbarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<ToolbarItem> ToolbarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets the <see cref="MenuBarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<MenuBarItem> MenuBarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets or sets the area this page is contained in.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Rect ContainerArea
+		{
+			get { return _containerArea; }
+			set
+			{
+				if (_containerArea == value)
+					return;
+				_containerAreaSet = true;
+				_containerArea = value;
+				ForceLayout();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value that determines whether to ignore the <see cref="ContainerArea"/>. This is a bindable property.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public bool IgnoresContainerArea
+		{
+			get { return (bool)GetValue(IgnoresContainerAreaProperty); }
+			set { SetValue(IgnoresContainerAreaProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the internal collection of child elements contained in this page.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public ObservableCollection<Element> InternalChildren { get; } = new ObservableCollection<Element>();
+
+		/// <inheritdoc/>
+		bool ISafeAreaView.IgnoreSafeArea => !On<PlatformConfiguration.iOS>().UsingSafeArea();
+
+		/// <inheritdoc/>
+		Thickness ISafeAreaView2.SafeAreaInsets
+		{
+			set
+			{
+				On<PlatformConfiguration.iOS>().SetSafeAreaInsets(value);
+			}
+		}
+
+		/// <summary>
+		/// Raised when the children of this page, and thus potentially the layout, have changed.
+		/// </summary>
+		public event EventHandler LayoutChanged;
+
+		/// <summary>
+		/// Raised when this page is visually appearing on screen.
+		/// </summary>
+		public event EventHandler Appearing;
+
+		/// <summary>
+		/// Raised when this page is visually disappearing from the screen.
+		/// </summary>
+		public event EventHandler Disappearing;
+
+		/// <inheritdoc cref="DisplayActionSheet(string, string, string, FlowDirection, string[])"/>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons)
+		{
+			return DisplayActionSheet(title, cancel, destruction, FlowDirection.MatchParent, buttons);
+		}
+
+		/// <summary>
+		/// Displays a platform action sheet, allowing the application user to choose from several buttons.
+		/// </summary>
+		/// <param name="title">Title of the displayed action sheet. Can be <see langword="null"/> to hide the title.</param>
+		/// <param name="cancel">Text to be displayed in the 'Cancel' button. Can be null to hide the <see langword="null"/> action.</param>
+		/// <param name="destruction">Text to be displayed in the 'Destruct' button. Can be <see langword="null"/> to hide the destructive option.</param>
+		/// <param name="flowDirection">The flow direction to be used by the action sheet.</param>
+		/// <param name="buttons">Text labels for additional buttons.</param>
+		/// <returns>A <see cref="Task"/> that displays an action sheet and returns the string caption of the button pressed by the user.</returns>
+		/// <remarks>Developers should be aware that Windows line endings, CR-LF, only work on Windows systems, and are incompatible with iOS and Android. A particular consequence of this is that characters that appear after a CR-LF, (For example, in the title) may not be displayed on non-Windows platforms. Developers must use the correct line endings for each of the targeted systems.</remarks>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, FlowDirection flowDirection, params string[] buttons)
+		{
+			var args = new ActionSheetArguments(title, cancel, destruction, buttons);
+
+			args.FlowDirection = flowDirection;
+#pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
+			if (IsPlatformEnabled)
+				MessagingCenter.Send(this, ActionSheetSignalName, args);
+			else
+				_pendingActions.Add(() => MessagingCenter.Send(this, ActionSheetSignalName, args));
+#pragma warning restore CS0618 // Type or member is obsolete
+
+			return args.Result.Task;
+		}
+
+		/// <inheritdoc cref="DisplayAlert(string, string, string, string, FlowDirection)"/>
+		public Task DisplayAlert(string title, string message, string cancel)
+		{
+			return DisplayAlert(title, message, null, cancel, FlowDirection.MatchParent);
+After:
+			{
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+			}
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+		}
+
+		void IPaddingElement.OnPaddingPropertyChanged(Thickness oldValue, Thickness newValue)
+		{
+			UpdateChildrenLayout();
+		}
+
+		/// <summary>
+		/// Gets or sets the page's title.
+		/// </summary>
+		/// <remarks>For example, this title might be shown in the flyout menu or a tab bar together with <see cref="IconImageSource"/>.</remarks>
+		public string Title
+		{
+			get { return (string)GetValue(TitleProperty); }
+			set { SetValue(TitleProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the <see cref="ToolbarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<ToolbarItem> ToolbarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets the <see cref="MenuBarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<MenuBarItem> MenuBarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets or sets the area this page is contained in.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Rect ContainerArea
+		{
+			get { return _containerArea; }
+			set
+			{
+				if (_containerArea == value)
+					return;
+				_containerAreaSet = true;
+				_containerArea = value;
+				ForceLayout();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value that determines whether to ignore the <see cref="ContainerArea"/>. This is a bindable property.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public bool IgnoresContainerArea
+		{
+			get { return (bool)GetValue(IgnoresContainerAreaProperty); }
+			set { SetValue(IgnoresContainerAreaProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the internal collection of child elements contained in this page.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public ObservableCollection<Element> InternalChildren { get; } = new ObservableCollection<Element>();
+
+		/// <inheritdoc/>
+		bool ISafeAreaView.IgnoreSafeArea => !On<PlatformConfiguration.iOS>().UsingSafeArea();
+
+		/// <inheritdoc/>
+		Thickness ISafeAreaView2.SafeAreaInsets
+		{
+			set
+			{
+				On<PlatformConfiguration.iOS>().SetSafeAreaInsets(value);
+			}
+		}
+
+		/// <summary>
+		/// Raised when the children of this page, and thus potentially the layout, have changed.
+		/// </summary>
+		public event EventHandler LayoutChanged;
+
+		/// <summary>
+		/// Raised when this page is visually appearing on screen.
+		/// </summary>
+		public event EventHandler Appearing;
+
+		/// <summary>
+		/// Raised when this page is visually disappearing from the screen.
+		/// </summary>
+		public event EventHandler Disappearing;
+
+		/// <inheritdoc cref="DisplayActionSheet(string, string, string, FlowDirection, string[])"/>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons)
+		{
+			return DisplayActionSheet(title, cancel, destruction, FlowDirection.MatchParent, buttons);
+		}
+
+		/// <summary>
+		/// Displays a platform action sheet, allowing the application user to choose from several buttons.
+		/// </summary>
+		/// <param name="title">Title of the displayed action sheet. Can be <see langword="null"/> to hide the title.</param>
+		/// <param name="cancel">Text to be displayed in the 'Cancel' button. Can be null to hide the <see langword="null"/> action.</param>
+		/// <param name="destruction">Text to be displayed in the 'Destruct' button. Can be <see langword="null"/> to hide the destructive option.</param>
+		/// <param name="flowDirection">The flow direction to be used by the action sheet.</param>
+		/// <param name="buttons">Text labels for additional buttons.</param>
+		/// <returns>A <see cref="Task"/> that displays an action sheet and returns the string caption of the button pressed by the user.</returns>
+		/// <remarks>Developers should be aware that Windows line endings, CR-LF, only work on Windows systems, and are incompatible with iOS and Android. A particular consequence of this is that characters that appear after a CR-LF, (For example, in the title) may not be displayed on non-Windows platforms. Developers must use the correct line endings for each of the targeted systems.</remarks>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, FlowDirection flowDirection, params string[] buttons)
+		{
+			var args = new ActionSheetArguments(title, cancel, destruction, buttons);
+
+			args.FlowDirection = flowDirection;
+#pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
+			if (IsPlatformEnabled)
+				MessagingCenter.Send(this, ActionSheetSignalName, args);
+			else
+				_pendingActions.Add(() => MessagingCenter.Send(this, ActionSheetSignalName, args));
+#pragma warning restore CS0618 // Type or member is obsolete
+
+			return args.Result.Task;
+		}
+
+		/// <inheritdoc cref="DisplayAlert(string, string, string, string, FlowDirection)"/>
+		public Task DisplayAlert(string title, string message, string cancel)
+		{
+			return DisplayAlert(title, message, null, cancel, FlowDirection.MatchParent);
+After:
+			{
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+			}
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+		}
+
+		void IPaddingElement.OnPaddingPropertyChanged(Thickness oldValue, Thickness newValue)
+		{
+			UpdateChildrenLayout();
+		}
+
+		/// <summary>
+		/// Gets or sets the page's title.
+		/// </summary>
+		/// <remarks>For example, this title might be shown in the flyout menu or a tab bar together with <see cref="IconImageSource"/>.</remarks>
+		public string Title
+		{
+			get { return (string)GetValue(TitleProperty); }
+			set { SetValue(TitleProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the <see cref="ToolbarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<ToolbarItem> ToolbarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets the <see cref="MenuBarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<MenuBarItem> MenuBarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets or sets the area this page is contained in.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Rect ContainerArea
+		{
+			get { return _containerArea; }
+			set
+			{
+				if (_containerArea == value)
+					return;
+				_containerAreaSet = true;
+				_containerArea = value;
+				ForceLayout();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value that determines whether to ignore the <see cref="ContainerArea"/>. This is a bindable property.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public bool IgnoresContainerArea
+		{
+			get { return (bool)GetValue(IgnoresContainerAreaProperty); }
+			set { SetValue(IgnoresContainerAreaProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the internal collection of child elements contained in this page.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public ObservableCollection<Element> InternalChildren { get; } = new ObservableCollection<Element>();
+
+		/// <inheritdoc/>
+		bool ISafeAreaView.IgnoreSafeArea => !On<PlatformConfiguration.iOS>().UsingSafeArea();
+
+		/// <inheritdoc/>
+		Thickness ISafeAreaView2.SafeAreaInsets
+		{
+			set
+			{
+				On<PlatformConfiguration.iOS>().SetSafeAreaInsets(value);
+			}
+		}
+
+		/// <summary>
+		/// Raised when the children of this page, and thus potentially the layout, have changed.
+		/// </summary>
+		public event EventHandler LayoutChanged;
+
+		/// <summary>
+		/// Raised when this page is visually appearing on screen.
+		/// </summary>
+		public event EventHandler Appearing;
+
+		/// <summary>
+		/// Raised when this page is visually disappearing from the screen.
+		/// </summary>
+		public event EventHandler Disappearing;
+
+		/// <inheritdoc cref="DisplayActionSheet(string, string, string, FlowDirection, string[])"/>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons)
+		{
+			return DisplayActionSheet(title, cancel, destruction, FlowDirection.MatchParent, buttons);
+		}
+
+		/// <summary>
+		/// Displays a platform action sheet, allowing the application user to choose from several buttons.
+		/// </summary>
+		/// <param name="title">Title of the displayed action sheet. Can be <see langword="null"/> to hide the title.</param>
+		/// <param name="cancel">Text to be displayed in the 'Cancel' button. Can be null to hide the <see langword="null"/> action.</param>
+		/// <param name="destruction">Text to be displayed in the 'Destruct' button. Can be <see langword="null"/> to hide the destructive option.</param>
+		/// <param name="flowDirection">The flow direction to be used by the action sheet.</param>
+		/// <param name="buttons">Text labels for additional buttons.</param>
+		/// <returns>A <see cref="Task"/> that displays an action sheet and returns the string caption of the button pressed by the user.</returns>
+		/// <remarks>Developers should be aware that Windows line endings, CR-LF, only work on Windows systems, and are incompatible with iOS and Android. A particular consequence of this is that characters that appear after a CR-LF, (For example, in the title) may not be displayed on non-Windows platforms. Developers must use the correct line endings for each of the targeted systems.</remarks>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, FlowDirection flowDirection, params string[] buttons)
+		{
+			var args = new ActionSheetArguments(title, cancel, destruction, buttons);
+
+			args.FlowDirection = flowDirection;
+#pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
+			if (IsPlatformEnabled)
+				MessagingCenter.Send(this, ActionSheetSignalName, args);
+			else
+				_pendingActions.Add(() => MessagingCenter.Send(this, ActionSheetSignalName, args));
+#pragma warning restore CS0618 // Type or member is obsolete
+
+			return args.Result.Task;
+		}
+
+		/// <inheritdoc cref="DisplayAlert(string, string, string, string, FlowDirection)"/>
+		public Task DisplayAlert(string title, string message, string cancel)
+		{
+			return DisplayAlert(title, message, null, cancel, FlowDirection.MatchParent);
+After:
+			{
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+			}
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+		}
+
+		void IPaddingElement.OnPaddingPropertyChanged(Thickness oldValue, Thickness newValue)
+		{
+			UpdateChildrenLayout();
+		}
+
+		/// <summary>
+		/// Gets or sets the page's title.
+		/// </summary>
+		/// <remarks>For example, this title might be shown in the flyout menu or a tab bar together with <see cref="IconImageSource"/>.</remarks>
+		public string Title
+		{
+			get { return (string)GetValue(TitleProperty); }
+			set { SetValue(TitleProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the <see cref="ToolbarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<ToolbarItem> ToolbarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets the <see cref="MenuBarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<MenuBarItem> MenuBarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets or sets the area this page is contained in.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Rect ContainerArea
+		{
+			get { return _containerArea; }
+			set
+			{
+				if (_containerArea == value)
+					return;
+				_containerAreaSet = true;
+				_containerArea = value;
+				ForceLayout();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value that determines whether to ignore the <see cref="ContainerArea"/>. This is a bindable property.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public bool IgnoresContainerArea
+		{
+			get { return (bool)GetValue(IgnoresContainerAreaProperty); }
+			set { SetValue(IgnoresContainerAreaProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the internal collection of child elements contained in this page.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public ObservableCollection<Element> InternalChildren { get; } = new ObservableCollection<Element>();
+
+		/// <inheritdoc/>
+		bool ISafeAreaView.IgnoreSafeArea => !On<PlatformConfiguration.iOS>().UsingSafeArea();
+
+		/// <inheritdoc/>
+		Thickness ISafeAreaView2.SafeAreaInsets
+		{
+			set
+			{
+				On<PlatformConfiguration.iOS>().SetSafeAreaInsets(value);
+			}
+		}
+
+		/// <summary>
+		/// Raised when the children of this page, and thus potentially the layout, have changed.
+		/// </summary>
+		public event EventHandler LayoutChanged;
+
+		/// <summary>
+		/// Raised when this page is visually appearing on screen.
+		/// </summary>
+		public event EventHandler Appearing;
+
+		/// <summary>
+		/// Raised when this page is visually disappearing from the screen.
+		/// </summary>
+		public event EventHandler Disappearing;
+
+		/// <inheritdoc cref="DisplayActionSheet(string, string, string, FlowDirection, string[])"/>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons)
+		{
+			return DisplayActionSheet(title, cancel, destruction, FlowDirection.MatchParent, buttons);
+		}
+
+		/// <summary>
+		/// Displays a platform action sheet, allowing the application user to choose from several buttons.
+		/// </summary>
+		/// <param name="title">Title of the displayed action sheet. Can be <see langword="null"/> to hide the title.</param>
+		/// <param name="cancel">Text to be displayed in the 'Cancel' button. Can be null to hide the <see langword="null"/> action.</param>
+		/// <param name="destruction">Text to be displayed in the 'Destruct' button. Can be <see langword="null"/> to hide the destructive option.</param>
+		/// <param name="flowDirection">The flow direction to be used by the action sheet.</param>
+		/// <param name="buttons">Text labels for additional buttons.</param>
+		/// <returns>A <see cref="Task"/> that displays an action sheet and returns the string caption of the button pressed by the user.</returns>
+		/// <remarks>Developers should be aware that Windows line endings, CR-LF, only work on Windows systems, and are incompatible with iOS and Android. A particular consequence of this is that characters that appear after a CR-LF, (For example, in the title) may not be displayed on non-Windows platforms. Developers must use the correct line endings for each of the targeted systems.</remarks>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, FlowDirection flowDirection, params string[] buttons)
+		{
+			var args = new ActionSheetArguments(title, cancel, destruction, buttons);
+
+			args.FlowDirection = flowDirection;
+#pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
+			if (IsPlatformEnabled)
+				MessagingCenter.Send(this, ActionSheetSignalName, args);
+			else
+				_pendingActions.Add(() => MessagingCenter.Send(this, ActionSheetSignalName, args));
+#pragma warning restore CS0618 // Type or member is obsolete
+
+			return args.Result.Task;
+		}
+
+		/// <inheritdoc cref="DisplayAlert(string, string, string, string, FlowDirection)"/>
+		public Task DisplayAlert(string title, string message, string cancel)
+		{
+			return DisplayAlert(title, message, null, cancel, FlowDirection.MatchParent);
+After:
+			{
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+			}
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+*/
+			{
+				InternalChildrenOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, InternalChildren));
+			}
+
+			InternalChildren.CollectionChanged += InternalChildrenOnCollectionChanged;
+			_platformConfigurationRegistry = new Lazy<PlatformConfigurationRegistry<Page>>(() => new PlatformConfigurationRegistry<Page>(this));
+			this.NavigatedTo += FlushPendingActions;
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> that will be used as the background for this page. This is a bindable property.
+		/// </summary>
+		public ImageSource BackgroundImageSource
+		{
+			get { return (ImageSource)GetValue(BackgroundImageSourceProperty); }
+			set { SetValue(BackgroundImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the <see cref="ImageSource"/> to be used for the icon associated to this page. This is a bindable property.
+		/// </summary>
+		/// <remarks>For example, this icon might be shown in the flyout menu or a tab bar together with <see cref="Title"/>.</remarks>
+		public ImageSource IconImageSource
+		{
+			get { return (ImageSource)GetValue(IconImageSourceProperty); }
+			set { SetValue(IconImageSourceProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the page busy state. This will cause the platform specific global activity indicator to show a busy state.
+		/// This is a bindable property.
+		/// </summary>
+		/// <remarks>
+		/// <para>Setting <see cref="IsBusy"/> to <see langword="true"/> on multiple pages at once will cause the global activity indicator to run until all are set back to <see langword="false"/>. It is the developer's responsibility to unset the <see cref="IsBusy"/> flag before cleaning up a page.</para>
+		/// </remarks>
+		public bool IsBusy
+		{
+			get { return (bool)GetValue(IsBusyProperty); }
+			set { SetValue(IsBusyProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets or sets the space between the content of the page and its border. This is a bindable property.
+		/// </summary>
+		public Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingElement.PaddingProperty); }
+			set { SetValue(PaddingElement.PaddingProperty, value); }
+		}
+
+		Thickness IPaddingElement.PaddingDefaultValueCreator()
+		{
+			return default(Thickness);
+		}
+
+		void IPaddingElement.OnPaddingPropertyChanged(Thickness oldValue, Thickness newValue)
+		{
+			UpdateChildrenLayout();
+		}
+
+		/// <summary>
+		/// Gets or sets the page's title.
+		/// </summary>
+		/// <remarks>For example, this title might be shown in the flyout menu or a tab bar together with <see cref="IconImageSource"/>.</remarks>
+		public string Title
+		{
+			get { return (string)GetValue(TitleProperty); }
+			set { SetValue(TitleProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the <see cref="ToolbarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<ToolbarItem> ToolbarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets the <see cref="MenuBarItem"/> objects for this page, implemented in a platform-specific manner.
+		/// </summary>
+		public IList<MenuBarItem> MenuBarItems { get; internal set; }
+
+		/// <summary>
+		/// Gets or sets the area this page is contained in.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public Rect ContainerArea
+		{
+			get { return _containerArea; }
+			set
+			{
+				if (_containerArea == value)
+				{
+					return;
+				}
+
+				_containerAreaSet = true;
+				_containerArea = value;
+				ForceLayout();
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value that determines whether to ignore the <see cref="ContainerArea"/>. This is a bindable property.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public bool IgnoresContainerArea
+		{
+			get { return (bool)GetValue(IgnoresContainerAreaProperty); }
+			set { SetValue(IgnoresContainerAreaProperty, value); }
+		}
+
+		/// <summary>
+		/// Gets the internal collection of child elements contained in this page.
+		/// </summary>
+		/// <remarks>For internal use only. This API can be changed or removed without notice at any time.</remarks>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public ObservableCollection<Element> InternalChildren { get; } = new ObservableCollection<Element>();
+
+		/// <inheritdoc/>
+		bool ISafeAreaView.IgnoreSafeArea => !On<PlatformConfiguration.iOS>().UsingSafeArea();
+
+		/// <inheritdoc/>
+		Thickness ISafeAreaView2.SafeAreaInsets
+		{
+			set
+			{
+				On<PlatformConfiguration.iOS>().SetSafeAreaInsets(value);
+			}
+		}
+
+		/// <summary>
+		/// Raised when the children of this page, and thus potentially the layout, have changed.
+		/// </summary>
+		public event EventHandler LayoutChanged;
+
+		/// <summary>
+		/// Raised when this page is visually appearing on screen.
+		/// </summary>
+		public event EventHandler Appearing;
+
+		/// <summary>
+		/// Raised when this page is visually disappearing from the screen.
+		/// </summary>
+		public event EventHandler Disappearing;
+
+		/// <inheritdoc cref="DisplayActionSheet(string, string, string, FlowDirection, string[])"/>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons)
+		{
+			return DisplayActionSheet(title, cancel, destruction, FlowDirection.MatchParent, buttons);
+		}
+
+		/// <summary>
+		/// Displays a platform action sheet, allowing the application user to choose from several buttons.
+		/// </summary>
+		/// <param name="title">Title of the displayed action sheet. Can be <see langword="null"/> to hide the title.</param>
+		/// <param name="cancel">Text to be displayed in the 'Cancel' button. Can be null to hide the <see langword="null"/> action.</param>
+		/// <param name="destruction">Text to be displayed in the 'Destruct' button. Can be <see langword="null"/> to hide the destructive option.</param>
+		/// <param name="flowDirection">The flow direction to be used by the action sheet.</param>
+		/// <param name="buttons">Text labels for additional buttons.</param>
+		/// <returns>A <see cref="Task"/> that displays an action sheet and returns the string caption of the button pressed by the user.</returns>
+		/// <remarks>Developers should be aware that Windows line endings, CR-LF, only work on Windows systems, and are incompatible with iOS and Android. A particular consequence of this is that characters that appear after a CR-LF, (For example, in the title) may not be displayed on non-Windows platforms. Developers must use the correct line endings for each of the targeted systems.</remarks>
+		public Task<string> DisplayActionSheet(string title, string cancel, string destruction, FlowDirection flowDirection, params string[] buttons)
+		{
+			var args = new ActionSheetArguments(title, cancel, destruction, buttons);
+
+			args.FlowDirection = flowDirection;
+#pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
+			if (IsPlatformEnabled)
+			{
+				MessagingCenter.Send(this, ActionSheetSignalName, args);
+			}
+			else
+			{
+				_pendingActions.Add(() => MessagingCenter.Send(this, ActionSheetSignalName, args));
+			}
+#pragma warning restore CS0618 // Type or member is obsolete
+
+			return args.Result.Task;
+		}
+
+		/// <inheritdoc cref="DisplayAlert(string, string, string, string, FlowDirection)"/>
+		public Task DisplayAlert(string title, string message, string cancel)
+		{
+			return DisplayAlert(title, message, null, cancel, FlowDirection.MatchParent);
 		}
 
 		/// <inheritdoc cref="DisplayAlert(string, string, string, string, FlowDirection)"/>
@@ -293,16 +1472,22 @@ namespace Microsoft.Maui.Controls
 		public Task<bool> DisplayAlert(string title, string message, string accept, string cancel, FlowDirection flowDirection)
 		{
 			if (string.IsNullOrEmpty(cancel))
+			{
 				throw new ArgumentNullException(nameof(cancel));
+			}
 
 			var args = new AlertArguments(title, message, accept, cancel);
 			args.FlowDirection = flowDirection;
 
 #pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
 			if (IsPlatformEnabled)
+			{
 				MessagingCenter.Send(this, AlertSignalName, args);
+			}
 			else
+			{
 				_pendingActions.Add(() => MessagingCenter.Send(this, AlertSignalName, args));
+			}
 #pragma warning restore CS0618 // Type or member is obsolete
 
 			return args.Result.Task;
@@ -326,9 +1511,13 @@ namespace Microsoft.Maui.Controls
 
 #pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
 			if (IsPlatformEnabled)
+			{
 				MessagingCenter.Send(this, PromptSignalName, args);
+			}
 			else
+			{
 				_pendingActions.Add(() => MessagingCenter.Send(this, PromptSignalName, args));
+			}
 #pragma warning restore CS0618 // Type or member is obsolete
 
 			return args.Result.Task;
@@ -341,7 +1530,9 @@ namespace Microsoft.Maui.Controls
 				var actionsToProcess = _pendingActions.ToList();
 				_pendingActions.Clear();
 				foreach (var pendingAction in actionsToProcess)
+				{
 					pendingAction();
+				}
 			}
 
 			this.NavigatedTo -= FlushPendingActions;
@@ -391,13 +1582,19 @@ namespace Microsoft.Maui.Controls
 			{
 				var child = element as VisualElement;
 				if (child == null)
+				{
 					continue;
+				}
 
 				var page = child as Page;
 				if (page != null && page.IgnoresContainerArea)
+				{
 					Maui.Controls.Compatibility.Layout.LayoutChildIntoBoundingRegion(child, originalArea);
+				}
 				else
+				{
 					Maui.Controls.Compatibility.Layout.LayoutChildIntoBoundingRegion(child, area);
+				}
 			}
 		}
 
@@ -420,11 +1617,15 @@ namespace Microsoft.Maui.Controls
 		protected virtual bool OnBackButtonPressed()
 		{
 			if (RealParent is BaseShellItem || RealParent is Shell)
+			{
 				return false;
+			}
 
 			var window = RealParent as Window;
 			if (window == null || this == window.Page)
+			{
 				return false;
+			}
 
 			var canceled = false;
 			EventHandler handler = (sender, args) => { canceled = true; };
@@ -454,7 +1655,9 @@ namespace Microsoft.Maui.Controls
 			}
 
 			if (_titleView != null)
+			{
 				SetInheritedBindingContext(_titleView, BindingContext);
+			}
 		}
 
 		/// <summary>
@@ -485,7 +1688,10 @@ namespace Microsoft.Maui.Controls
 		protected override void OnParentSet()
 		{
 			if (!Application.IsApplicationOrWindowOrNull(RealParent) && !(RealParent is Page) && !(RealParent is BaseShellItem))
+			{
 				throw new InvalidOperationException("Parent of a Page must also be a Page");
+			}
+
 			base.OnParentSet();
 		}
 
@@ -507,14 +1713,18 @@ namespace Microsoft.Maui.Controls
 		protected void UpdateChildrenLayout()
 		{
 			if (!ShouldLayoutChildren())
+			{
 				return;
+			}
 
 			var logicalChildren = this.InternalChildren;
 			var startingLayout = new List<Rect>(logicalChildren.Count);
 			foreach (Element el in logicalChildren)
 			{
 				if (el is VisualElement c)
+				{
 					startingLayout.Add(c.Bounds);
+				}
 			}
 
 			double x = Padding.Left;
@@ -545,7 +1755,9 @@ namespace Microsoft.Maui.Controls
 			{
 				Page page = container.CurrentPage;
 				if (page != null && page.IsVisible && (!page.IsPlatformEnabled || !page.IsPlatformStateConsistent))
+				{
 					return;
+				}
 			}
 			else
 			{
@@ -554,7 +1766,9 @@ namespace Microsoft.Maui.Controls
 				{
 					var v = logicalChildren[i] as VisualElement;
 					if (v != null && v.IsVisible && (!v.IsPlatformEnabled || !v.IsPlatformStateConsistent))
+					{
 						return;
+					}
 				}
 			}
 
@@ -569,7 +1783,9 @@ namespace Microsoft.Maui.Controls
 		internal void OnAppearing(Action action)
 		{
 			if (_hasAppeared)
+			{
 				action();
+			}
 			else
 			{
 				EventHandler eventHandler = null;
@@ -601,7 +1817,9 @@ namespace Microsoft.Maui.Controls
 			}
 
 			if (_hasAppeared)
+			{
 				return;
+			}
 
 			_hasAppeared = true;
 
@@ -609,9 +1827,13 @@ namespace Microsoft.Maui.Controls
 			{
 #pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
 				if (IsPlatformEnabled)
+				{
 					MessagingCenter.Send(this, BusySetSignalName, true);
+				}
 				else
+				{
 					_pendingActions.Add(() => MessagingCenter.Send(this, BusySetSignalName, true));
+				}
 			}
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -632,13 +1854,17 @@ namespace Microsoft.Maui.Controls
 		public void SendDisappearing()
 		{
 			if (!_hasAppeared)
+			{
 				return;
+			}
 
 			_hasAppeared = false;
 
 #pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
 			if (IsBusy)
+			{
 				MessagingCenter.Send(this, BusySetSignalName, false);
+			}
 #pragma warning restore CS0618 // Type or member is obsolete
 
 			var pageContainer = this as IPageContainer<Page>;
@@ -653,7 +1879,9 @@ namespace Microsoft.Maui.Controls
 		Application FindApplication(Element element)
 		{
 			if (element == null)
+			{
 				return null;
+			}
 
 			return (element.Parent is Application app) ? app : FindApplication(element.Parent);
 		}
@@ -666,7 +1894,9 @@ namespace Microsoft.Maui.Controls
 				{
 					var item = (Element)e.OldItems[i];
 					if (item is VisualElement visual)
+					{
 						visual.MeasureInvalidated -= OnChildMeasureInvalidated;
+					}
 
 					RemoveLogicalChild(item);
 				}
@@ -680,7 +1910,9 @@ namespace Microsoft.Maui.Controls
 				{
 					int insertIndex = index;
 					if (insertIndex < 0)
+					{
 						insertIndex = InternalChildren.IndexOf(item);
+					}
 
 					if (item is VisualElement visual)
 					{
@@ -690,10 +1922,14 @@ namespace Microsoft.Maui.Controls
 						InvalidateMeasureInternal(InvalidationTrigger.MeasureChanged);
 					}
 					else
+					{
 						InsertLogicalChild(insertIndex, item);
+					}
 
 					if (index >= 0)
+					{
 						index++;
+					}
 				}
 			}
 		}
@@ -701,7 +1937,9 @@ namespace Microsoft.Maui.Controls
 		void OnPageBusyChanged()
 		{
 			if (!_hasAppeared)
+			{
 				return;
+			}
 #pragma warning disable CS0618 // TODO: Remove when we internalize/replace MessagingCenter
 			MessagingCenter.Send(this, BusySetSignalName, IsBusy);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -712,13 +1950,17 @@ namespace Microsoft.Maui.Controls
 			if (args.NewItems != null)
 			{
 				foreach (IElementDefinition item in args.NewItems)
+				{
 					item.Parent = this;
+				}
 			}
 
 			if (args.OldItems != null)
 			{
 				foreach (IElementDefinition item in args.OldItems)
+				{
 					item.Parent = null;
+				}
 			}
 		}
 
@@ -726,13 +1968,18 @@ namespace Microsoft.Maui.Controls
 		{
 			var logicalChildren = this.InternalChildren;
 			if (logicalChildren.Count == 0 || Width <= 0 || Height <= 0 || !IsPlatformStateConsistent)
+			{
 				return false;
+			}
 
 			var container = this as IPageContainer<Page>;
 			if (container?.CurrentPage != null)
 			{
 				if (InternalChildren.Contains(container.CurrentPage))
+				{
 					return container.CurrentPage.IsPlatformEnabled && container.CurrentPage.IsPlatformStateConsistent;
+				}
+
 				return true;
 			}
 
@@ -768,11 +2015,19 @@ namespace Microsoft.Maui.Controls
 			get
 			{
 				if (!Brush.IsNullOrEmpty(Background))
+				{
 					return Background;
+				}
+
 				if (!ImageSource.IsNullOrEmpty(BackgroundImageSource))
+				{
 					return new ImageSourcePaint(BackgroundImageSource);
+				}
+
 				if (BackgroundColor.IsNotDefault())
+				{
 					return new SolidColorBrush(BackgroundColor);
+				}
 
 				return null;
 			}

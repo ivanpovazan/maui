@@ -93,14 +93,20 @@ namespace Microsoft.Maui.Controls.Handlers.Compatibility
 					if (item is Cell cell)
 					{
 						if (cell.IsEnabled)
+						{
 							Element.Model.RowSelected(cell);
+						}
+
 						break;
 					}
 				}
 			}
 
 			if (Control == null)
+			{
+			{
 				return;
+			}
 
 			Control.SelectedItem = null;
 		}

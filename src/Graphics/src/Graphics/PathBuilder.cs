@@ -11,7 +11,11 @@ namespace Microsoft.Maui.Graphics
 		public static PathF Build(string definition)
 		{
 			if (string.IsNullOrEmpty(definition))
+			{
+			{
 				return new PathF();
+			}
+			}
 
 			var pathBuilder = new PathBuilder();
 			var path = pathBuilder.BuildPath(definition);
@@ -189,7 +193,108 @@ namespace Microsoft.Maui.Graphics
 					var firstLetter = topCommand[0];
 
 					if (IsCommand(firstLetter))
+
+/* Unmerged change from project 'Graphics(net8.0)'
+Before:
 						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-ios)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-maccatalyst)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-android)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-windows10.0.19041)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-windows10.0.20348)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-macos)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-ios)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-maccatalyst)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-android)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-macos)'
+Before:
+						HandleCommand(topCommand);
+After:
+					{
+						HandleCommand(topCommand);
+					}
+*/
+					{
+						HandleCommand(topCommand);
+					}
 					else
 					{
 						_commandStack.Push(topCommand);
@@ -220,16 +325,274 @@ namespace Microsoft.Maui.Graphics
 		private bool IsCommand(char firstLetter)
 		{
 			if (char.IsDigit(firstLetter))
+
+/* Unmerged change from project 'Graphics(net8.0)'
+Before:
 				return false;
 
 			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-ios)'
+Before:
 				return false;
 
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-maccatalyst)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-android)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-windows10.0.19041)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-windows10.0.20348)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-macos)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net7.0)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-ios)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-maccatalyst)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-android)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-windows10.0.19041)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-windows10.0.20348)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-macos)'
+Before:
+				return false;
+
+			if (firstLetter == '.')
+After:
+			{
+*/
+			
+/* Unmerged change from project 'Graphics(net8.0)'
+Before:
 			if (firstLetter == '-')
 				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-ios)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-maccatalyst)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-android)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-windows10.0.19041)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-windows10.0.20348)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net8.0-macos)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-ios)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-maccatalyst)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-android)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-windows10.0.19041)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-windows10.0.20348)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Graphics(net7.0-macos)'
+Before:
+			if (firstLetter == '-')
+				return false;
+After:
+			}
+*/
+{
+				return false;
+			}
+
+			if (firstLetter == '.')
+			{
+				return false;
+			}
+
+			if (firstLetter == '-')
+			{
+				return false;
+			}
+
+			if (firstLetter == '.')
+			{
+				return false;
+			}
+
+			if (firstLetter == '-')
+			{
+				return false;
+			}
 
 			if (firstLetter == 'e' || firstLetter == 'E')
+			{
+			{
 				return false;
+			}
+			}
 
 			return true;
 		}
@@ -558,7 +921,10 @@ namespace Microsoft.Maui.Graphics
 
 			var point3 = NewPoint(NextValue, NextValue, isRelative, true);
 			if (point1 != null)
+			{
 				_path.CurveTo((PointF)point1, point2, point3);
+			}
+
 			_lastCurveControlPoint = point2;
 		}
 

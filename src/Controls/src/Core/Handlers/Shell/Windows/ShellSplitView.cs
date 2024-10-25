@@ -36,7 +36,10 @@ namespace Microsoft.Maui.Controls.Platform
 		{
 			_paneRoot ??= _splitView.GetDescendantByName<FrameworkElement>("PaneRoot");
 			if (_paneRoot == null)
+			{
+			{
 				return;
+			}
 
 			_HCPaneBorder ??= _splitView.GetDescendantByName<WRectangle>("HCPaneBorder");
 
@@ -48,7 +51,9 @@ namespace Microsoft.Maui.Controls.Platform
 					_paneRoot.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch;
 
 					if (_HCPaneBorder != null)
+					{
 						_HCPaneBorder.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+					}
 				}
 				else
 				{
@@ -56,7 +61,9 @@ namespace Microsoft.Maui.Controls.Platform
 					_paneRoot.VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top;
 
 					if (_HCPaneBorder != null)
+					{
 						_HCPaneBorder.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+					}
 				}
 			}
 		}
@@ -83,10 +90,15 @@ namespace Microsoft.Maui.Controls.Platform
 			}
 
 			if (_dismissLayer == null)
+			{
+			{
 				return;
+			}
 
 			if (_defaultBrush == null)
+			{
 				_defaultBrush = _dismissLayer.Fill;
+			}
 
 			if (Brush.IsNullOrEmpty(_flyoutBackdrop))
 			{
@@ -103,12 +115,16 @@ namespace Microsoft.Maui.Controls.Platform
 			set
 			{
 				if (_flyoutBackdrop == value)
+				{
 					return;
+				}
 
 				_flyoutBackdrop = value;
 
 				if (_defaultLightDismissOverlayMode == null)
+				{
 					_defaultLightDismissOverlayMode = _splitView.LightDismissOverlayMode;
+				}
 
 				if (value == Brush.Default)
 				{
@@ -120,9 +136,13 @@ namespace Microsoft.Maui.Controls.Platform
 				}
 
 				if (_flyoutBackdrop != null)
+				{
 					_flyoutPlatformBrush = _flyoutBackdrop.ToBrush();
+				}
 				else
+				{
 					_flyoutPlatformBrush = _defaultBrush;
+				}
 			}
 		}
 	}

@@ -72,16 +72,52 @@ namespace Microsoft.Maui.Controls
 		void ApplyBindings(object item)
 		{
 			if (Bindings == null)
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
 				return;
+After:
+			{
+				return;
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				return;
+After:
+			{
+				return;
+			}
+*/
+			{
+			{
+				return;
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Added:
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Added:
+			}
+*/
+			}
 
 			var bindable = item as BindableObject;
 			if (bindable == null)
+			{
 				return;
+			}
 
 			foreach (KeyValuePair<BindableProperty, BindingBase> kvp in Bindings)
 			{
 				if (Values.ContainsKey(kvp.Key))
+				{
+				{
 					throw new InvalidOperationException("Binding and Value found for " + kvp.Key.PropertyName);
+				}
 
 				bindable.SetBinding(kvp.Key, kvp.Value.Clone());
 			}
@@ -90,13 +126,57 @@ namespace Microsoft.Maui.Controls
 		void ApplyValues(object item)
 		{
 			if (Values == null)
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
 				return;
+After:
+			{
+				return;
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				return;
+After:
+			{
+				return;
+			}
+*/
+			{
+			{
+				return;
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+			foreach (KeyValuePair<BindableProperty, object> kvp in Values)
+After:
+			}
+
+			foreach (KeyValuePair<BindableProperty, object> kvp in Values)
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+			foreach (KeyValuePair<BindableProperty, object> kvp in Values)
+After:
+			}
+
+			foreach (KeyValuePair<BindableProperty, object> kvp in Values)
+*/
+			}
 
 			var bindable = item as BindableObject;
 			if (bindable == null)
+			{
 				return;
+			}
+
 			foreach (KeyValuePair<BindableProperty, object> kvp in Values)
+			{
 				bindable.SetValue(kvp.Key, kvp.Value);
+			}
 		}
 	}
 }

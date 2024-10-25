@@ -35,7 +35,7 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 
 		[UnconditionalSuppressMessage("Memory", "MEM0002", Justification = "Proven safe in test: MemoryTests.HandlerDoesNotLeak")]
 		Func<UICollectionViewCell> _getPrototype;
-		
+
 		[UnconditionalSuppressMessage("Memory", "MEM0002", Justification = "Proven safe in test: MemoryTests.HandlerDoesNotLeak")]
 		Func<NSIndexPath, UICollectionViewCell> _getPrototypeForIndexPath;
 		CGSize _previousContentSize = CGSize.Empty;
@@ -59,7 +59,9 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 		{
 			// Ignore calls to this method if the new layout is the same as the old one
 			if (CollectionView.CollectionViewLayout == newLayout)
+			{
 				return;
+			}
 
 			ItemsViewLayout = newLayout;
 			_initialized = false;
@@ -76,7 +78,9 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 		protected override void Dispose(bool disposing)
 		{
 			if (_disposed)
+			{
 				return;
+			}
 
 			_disposed = true;
 
@@ -374,7 +378,9 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 		void CellContentSizeChanged(object sender, EventArgs e)
 		{
 			if (_disposed)
+			{
 				return;
+			}
 
 			if (!(sender is TemplatedCell cell))
 			{
@@ -600,9 +606,13 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 			bool isRtl;
 
 			if (OperatingSystem.IsIOSVersionAtLeast(10) || OperatingSystem.IsTvOSVersionAtLeast(10))
+			{
 				isRtl = CollectionView.EffectiveUserInterfaceLayoutDirection == UIUserInterfaceLayoutDirection.RightToLeft;
+			}
 			else
+			{
 				isRtl = CollectionView.SemanticContentAttribute == UISemanticContentAttribute.ForceRightToLeft;
+			}
 
 			if (isRtl)
 			{
@@ -684,7 +694,9 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 			_emptyUIView.Frame = frame;
 
 			if (_emptyViewFormsElement != null && ((IElementController)ItemsView).LogicalChildren.IndexOf(_emptyViewFormsElement) != -1)
+			{
 				_emptyViewFormsElement.Layout(frame.ToRectangle());
+			}
 		}
 
 		TemplatedCell CreateAppropriateCellForLayout()
@@ -725,7 +737,9 @@ namespace Microsoft.Maui.Controls.Handlers.Items
 
 			// Keep this cell around, we can transfer the contents to the actual cell when the UICollectionView creates it
 			if (_measurementCells != null)
+			{
 				_measurementCells[ItemsSource[indexPath]] = templatedCell;
+			}
 
 			return templatedCell;
 		}
