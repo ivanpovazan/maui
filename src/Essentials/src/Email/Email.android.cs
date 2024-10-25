@@ -40,9 +40,43 @@ namespace Microsoft.Maui.ApplicationModel.Communication
 			var intent = new Intent(action);
 
 			if (action == Intent.ActionSendto)
+
+/* Unmerged change from project 'Essentials(net7.0-android)'
+Before:
 				intent.SetData(Uri.Parse("mailto:"));
 			else
 				intent.SetType(FileMimeTypes.EmailMessage);
+After:
+			{
+				intent.SetData(Uri.Parse("mailto:"));
+			}
+			else
+			{
+				intent.SetType(FileMimeTypes.EmailMessage);
+			}
+*/
+			
+/* Unmerged change from project 'Essentials(net7.0-android)'
+Before:
+				intent.PutExtra(Intent.ExtraSubject, message.Subject);
+			if (message?.To?.Count > 0)
+				intent.PutExtra(Intent.ExtraEmail, message.To.ToArray());
+			if (message?.Cc?.Count > 0)
+				intent.PutExtra(Intent.ExtraCc, message.Cc.ToArray());
+			if (message?.Bcc?.Count > 0)
+				intent.PutExtra(Intent.ExtraBcc, message.Bcc.ToArray());
+After:
+			{
+				intent.PutExtra(Intent.ExtraSubject, message.Subject);
+			}
+*/
+{
+				intent.SetData(Uri.Parse("mailto:"));
+			}
+			else
+			{
+				intent.SetType(FileMimeTypes.EmailMessage);
+			}
 
 			if (!string.IsNullOrEmpty(message?.Body))
 			{
@@ -69,13 +103,31 @@ namespace Microsoft.Maui.ApplicationModel.Communication
 				}
 			}
 			if (!string.IsNullOrEmpty(message?.Subject))
+			{
 				intent.PutExtra(Intent.ExtraSubject, message.Subject);
+			}
+
 			if (message?.To?.Count > 0)
+			{
 				intent.PutExtra(Intent.ExtraEmail, message.To.ToArray());
+			}
+
 			if (message?.Cc?.Count > 0)
-				intent.PutExtra(Intent.ExtraCc, message.Cc.ToArray());
+			{
+				intent.PutExtra(Intent.ExtraCc, 
+/* Unmerged change from project 'Essentials(net7.0-android)'
+Before:
+				intent.AddFlags(ActivityFlags.GrantReadUriPermission);
+After:
+				intent.AddFlags(ActivityFlags.GrantReadUriPermission));
+*/
+message.Cc.ToArray());
+			}
+
 			if (message?.Bcc?.Count > 0)
+			{
 				intent.PutExtra(Intent.ExtraBcc, message.Bcc.ToArray());
+			}
 
 			if (message?.Attachments?.Count > 0)
 			{
@@ -86,9 +138,38 @@ namespace Microsoft.Maui.ApplicationModel.Communication
 				}
 
 				if (uris.Count > 1)
+				{
 					intent.PutParcelableArrayListExtra(Intent.ExtraStream, uris);
+				}
 				else
+				{
 					intent.PutExtra(Intent.ExtraStream, uris[0]);
+				}
+
+				intent.AddFlags(ActivityFlags.GrantReadUriPermission);
+			}
+
+			if (message?.Bcc?.Count > 0)
+			{
+				intent.PutExtra(Intent.ExtraBcc, message.Bcc.ToArray());
+			}
+
+			if (message?.Attachments?.Count > 0)
+			{
+				var uris = new List<IParcelable>();
+				foreach (var attachment in message.Attachments)
+				{
+					uris.Add(FileSystemUtils.GetShareableFileUri(attachment));
+				}
+
+				if (uris.Count > 1)
+				{
+					intent.PutParcelableArrayListExtra(Intent.ExtraStream, uris);
+				}
+				else
+				{
+					intent.PutExtra(Intent.ExtraStream, uris[0]);
+				}
 
 				intent.AddFlags(ActivityFlags.GrantReadUriPermission);
 			}

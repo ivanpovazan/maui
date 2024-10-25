@@ -38,11 +38,15 @@ namespace Microsoft.Maui.Controls
 			_collection = enumerable as ICollection;
 
 			if (_collection == null && enumerable is IReadOnlyCollection<object> coll)
+			{
 				_collection = new ReadOnlyListAdapter(coll);
+			}
 
 			_list = enumerable as IList;
 			if (_list == null && enumerable is IReadOnlyList<object>)
+			{
 				_list = new ReadOnlyListAdapter((IReadOnlyList<object>)enumerable);
+			}
 
 			if (enumerable is INotifyCollectionChanged changed)
 			{
@@ -73,12 +77,102 @@ namespace Microsoft.Maui.Controls
 		public bool Contains(object item)
 		{
 			if (_list != null)
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
 				return _list.Contains(item);
 
 			EnsureWindowCreated();
 
 			if (_items != null)
 				return _items.Values.Contains(item);
+After:
+			{
+				return _list.Contains(item);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+				return _list.Contains(item);
+
+			EnsureWindowCreated();
+
+			if (_items != null)
+				return _items.Values.Contains(item);
+After:
+			{
+				return _list.Contains(item);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				return _list.Contains(item);
+
+			EnsureWindowCreated();
+
+			if (_items != null)
+				return _items.Values.Contains(item);
+After:
+			{
+				return _list.Contains(item);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				return _list.Contains(item);
+
+			EnsureWindowCreated();
+
+			if (_items != null)
+				return _items.Values.Contains(item);
+After:
+			{
+				return _list.Contains(item);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				return _list.Contains(item);
+
+			EnsureWindowCreated();
+
+			if (_items != null)
+				return _items.Values.Contains(item);
+After:
+			{
+				return _list.Contains(item);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				return _list.Contains(item);
+
+			EnsureWindowCreated();
+
+			if (_items != null)
+				return _items.Values.Contains(item);
+After:
+			{
+				return _list.Contains(item);
+*/
+			{
+				return _list.Contains(item);
+			}
+
+			EnsureWindowCreated();
+
+			if (_items != null)
+			{
+				return _items.Values.Contains(item);
+			}
+			}
+
+			EnsureWindowCreated();
+
+			if (_items != null)
+			{
+				return _items.Values.Contains(item);
+			}
 
 			return false;
 		}
@@ -91,7 +185,9 @@ namespace Microsoft.Maui.Controls
 		public int IndexOf(object item)
 		{
 			if (_list != null)
+			{
 				return _list.IndexOf(item);
+			}
 
 			EnsureWindowCreated();
 
@@ -100,7 +196,9 @@ namespace Microsoft.Maui.Controls
 				foreach (KeyValuePair<int, object> kvp in _items)
 				{
 					if (Equals(kvp.Value, item))
+					{
 						return kvp.Key;
+					}
 				}
 			}
 
@@ -114,12 +212,16 @@ namespace Microsoft.Maui.Controls
 			get
 			{
 				if (_collection != null)
+				{
 					return _collection.Count;
+				}
 
 				EnsureWindowCreated();
 
 				if (_indexesCounted != null)
+				{
 					return _indexesCounted.Count;
+				}
 
 				return 0;
 			}
@@ -131,7 +233,10 @@ namespace Microsoft.Maui.Controls
 			{
 				object value;
 				if (!TryGetValue(index, out value))
+				{
+				{
 					throw new ArgumentOutOfRangeException("index");
+				}
 
 				return value;
 			}
@@ -148,6 +253,9 @@ namespace Microsoft.Maui.Controls
 			{
 				var dispose = _enumerator as IDisposable;
 				if (dispose != null)
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
 					dispose.Dispose();
 
 				_enumerator = null;
@@ -155,8 +263,234 @@ namespace Microsoft.Maui.Controls
 
 			if (_items != null)
 				_items.Clear();
-			if (_indexesCounted != null)
+After:
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+					dispose.Dispose();
+
+				_enumerator = null;
+			}
+
+			if (_items != null)
+				_items.Clear();
+After:
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+					dispose.Dispose();
+
+				_enumerator = null;
+			}
+
+			if (_items != null)
+				_items.Clear();
+After:
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+					dispose.Dispose();
+
+				_enumerator = null;
+			}
+
+			if (_items != null)
+				_items.Clear();
+After:
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+					dispose.Dispose();
+
+				_enumerator = null;
+			}
+
+			if (_items != null)
+				_items.Clear();
+After:
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+					dispose.Dispose();
+
+				_enumerator = null;
+			}
+
+			if (_items != null)
+				_items.Clear();
+After:
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+			}
+*/
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+			}
+
+			if (_items != null)
+			{
+				_items.Clear();
+			}
+
+			if (_items != null)
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
 				_indexesCounted.Clear();
+
+			OnCountChanged();
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+After:
+			{
+				_items.Clear();
+			}
+
+			if (_indexesCounted != null)
+			{
+				_indexesCounted.Clear();
+			}
+
+			OnCountChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+				_indexesCounted.Clear();
+
+			OnCountChanged();
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+After:
+			{
+				_items.Clear();
+			}
+
+			if (_indexesCounted != null)
+			{
+				_indexesCounted.Clear();
+			}
+
+			OnCountChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				_indexesCounted.Clear();
+
+			OnCountChanged();
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+After:
+			{
+				_items.Clear();
+			}
+
+			if (_indexesCounted != null)
+			{
+				_indexesCounted.Clear();
+			}
+
+			OnCountChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				_indexesCounted.Clear();
+
+			OnCountChanged();
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+After:
+			{
+				_items.Clear();
+			}
+
+			if (_indexesCounted != null)
+			{
+				_indexesCounted.Clear();
+			}
+
+			OnCountChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				_indexesCounted.Clear();
+
+			OnCountChanged();
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+After:
+			{
+				_items.Clear();
+			}
+
+			if (_indexesCounted != null)
+			{
+				_indexesCounted.Clear();
+			}
+
+			OnCountChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				_indexesCounted.Clear();
+
+			OnCountChanged();
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+After:
+			{
+				_items.Clear();
+			}
+
+			if (_indexesCounted != null)
+			{
+				_indexesCounted.Clear();
+			}
+
+			OnCountChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+*/
+			{
+				_indexesCounted.Clear();
+			}
 
 			OnCountChanged();
 			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
@@ -167,15 +501,23 @@ namespace Microsoft.Maui.Controls
 		void ClearRange(int index, int clearCount)
 		{
 			if (_items == null)
+			{
+			{
 				return;
+			}
 
 			for (int i = index; i < index + clearCount; i++)
+			{
 				_items.Remove(i);
+			}
 		}
 
 		bool CountIndex(int index)
 		{
 			if (_collection != null)
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
 				return false;
 
 			// A collection is used in case TryGetValue is called out of order.
@@ -183,7 +525,100 @@ namespace Microsoft.Maui.Controls
 				_indexesCounted = new HashSet<int>();
 
 			if (_indexesCounted.Contains(index))
+After:
+			{
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
 				return false;
+
+			// A collection is used in case TryGetValue is called out of order.
+			if (_indexesCounted == null)
+				_indexesCounted = new HashSet<int>();
+
+			if (_indexesCounted.Contains(index))
+After:
+			{
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				return false;
+
+			// A collection is used in case TryGetValue is called out of order.
+			if (_indexesCounted == null)
+				_indexesCounted = new HashSet<int>();
+
+			if (_indexesCounted.Contains(index))
+After:
+			{
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				return false;
+
+			// A collection is used in case TryGetValue is called out of order.
+			if (_indexesCounted == null)
+				_indexesCounted = new HashSet<int>();
+
+			if (_indexesCounted.Contains(index))
+After:
+			{
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				return false;
+
+			// A collection is used in case TryGetValue is called out of order.
+			if (_indexesCounted == null)
+				_indexesCounted = new HashSet<int>();
+
+			if (_indexesCounted.Contains(index))
+After:
+			{
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				return false;
+
+			// A collection is used in case TryGetValue is called out of order.
+			if (_indexesCounted == null)
+				_indexesCounted = new HashSet<int>();
+
+			if (_indexesCounted.Contains(index))
+After:
+			{
+*/
+			{
+				return false;
+			}
+
+			// A collection is used in case TryGetValue is called out of order.
+			if (_indexesCounted == null)
+			{
+				_indexesCounted = new HashSet<int>();
+			}
+
+			if (_indexesCounted.Contains(index))
+			{
+				return false;
+			}
+			}
+
+			// A collection is used in case TryGetValue is called out of order.
+			if (_indexesCounted == null)
+			{
+				_indexesCounted = new HashSet<int>();
+			}
+
+			if (_indexesCounted.Contains(index))
+			{
+				return false;
+			}
 
 			_indexesCounted.Add(index);
 			return true;
@@ -192,7 +627,10 @@ namespace Microsoft.Maui.Controls
 		void EnsureWindowCreated()
 		{
 			if (_items != null && _items.Count > 0)
+			{
+			{
 				return;
+			}
 
 			object value;
 			TryGetValue(0, out value);
@@ -234,14 +672,18 @@ namespace Microsoft.Maui.Controls
 		{
 			NotifyCollectionChangedEventHandler changed = CollectionChanged;
 			if (changed != null)
+			{
 				changed(this, e);
+			}
 		}
 
 		void OnCountChanged()
 		{
 			EventHandler changed = CountChanged;
 			if (changed != null)
+			{
 				changed(this, EventArgs.Empty);
+			}
 		}
 
 		bool TryGetValue(int index, out object value)
@@ -258,66 +700,14 @@ namespace Microsoft.Maui.Controls
 				Action getFromList = () =>
 				{
 					if (index >= _list.Count)
+					{
 						return;
+					}
 
 					indexedValue = _list[index];
-					inRange = true;
-				};
 
-				if (syncContext != null)
-					syncContext.Callback(ProxiedEnumerable, syncContext.Context, getFromList, false);
-				else
-					getFromList();
-
-				value = indexedValue;
-				return inRange;
-			}
-
-			if (_collection != null && index >= _collection.Count)
-				return false;
-			if (_items != null)
-			{
-				bool found = _items.TryGetValue(index, out value);
-				if (found || _finished)
-					return found;
-			}
-
-			if (index >= _windowIndex + _windowSize)
-			{
-				int newIndex = index - _windowSize / 2;
-				ClearRange(_windowIndex, newIndex - _windowIndex);
-				_windowIndex = newIndex;
-			}
-			else if (index < _windowIndex)
-			{
-				int clearIndex = _windowIndex;
-				int clearSize = _windowSize;
-				if (clearIndex <= index + clearSize)
-				{
-					int diff = index + clearSize - clearIndex;
-					clearIndex += diff + 1;
-					clearSize -= diff;
-				}
-
-				ClearRange(clearIndex, clearSize);
-				_windowIndex = 0;
-
-				var dispose = _enumerator as IDisposable;
-				if (dispose != null)
-					dispose.Dispose();
-
-				_enumerator = null;
-				_enumeratorIndex = 0;
-			}
-
-			if (_enumerator == null)
-				_enumerator = ProxiedEnumerable.GetEnumerator();
-			if (_items == null)
-				_items = new Dictionary<int, object>();
-
-			var countChanged = false;
-			int end = _windowIndex + _windowSize;
-
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
 			for (; _enumeratorIndex < end; _enumeratorIndex++)
 			{
 				var moved = false;
@@ -407,6 +797,2116 @@ namespace Microsoft.Maui.Controls
 		#region IList
 
 		bool IListProxy.TryGetValue(int index, out object value)
+			=> TryGetValue(index, out value);
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { throw new NotSupportedException(); }
+		}
+
+		bool IList.IsReadOnly
+		{
+			get { return true; }
+		}
+
+		bool IList.IsFixedSize
+		{
+			get { return false; }
+		}
+
+		bool ICollection.IsSynchronized
+		{
+			get { return false; }
+		}
+
+		object ICollection.SyncRoot
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		int IList.Add(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Remove(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Insert(int index, object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.RemoveAt(int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Clear()
+After:
+					inRange = true;
+				};
+
+				if (syncContext != null)
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, getFromList, false);
+				}
+				else
+				{
+					getFromList();
+				}
+
+				value = indexedValue;
+				return inRange;
+			}
+
+			if (_collection != null && index >= _collection.Count)
+			{
+				return false;
+			}
+
+			if (_items != null)
+			{
+				bool found = _items.TryGetValue(index, out value);
+				if (found || _finished)
+				{
+					return found;
+				}
+			}
+
+			if (index >= _windowIndex + _windowSize)
+			{
+				int newIndex = index - _windowSize / 2;
+				ClearRange(_windowIndex, newIndex - _windowIndex);
+				_windowIndex = newIndex;
+			}
+			else if (index < _windowIndex)
+			{
+				int clearIndex = _windowIndex;
+				int clearSize = _windowSize;
+				if (clearIndex <= index + clearSize)
+				{
+					int diff = index + clearSize - clearIndex;
+					clearIndex += diff + 1;
+					clearSize -= diff;
+				}
+
+				ClearRange(clearIndex, clearSize);
+				_windowIndex = 0;
+
+				var dispose = _enumerator as IDisposable;
+				if (dispose != null)
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+				_enumeratorIndex = 0;
+			}
+
+			if (_enumerator == null)
+			{
+				_enumerator = ProxiedEnumerable.GetEnumerator();
+			}
+
+			if (_items == null)
+			{
+				_items = new Dictionary<int, object>();
+			}
+
+			var countChanged = false;
+			int end = _windowIndex + _windowSize;
+
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+						{
+							dispose.Dispose();
+						}
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+				{
+					move();
+				}
+				else
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+				}
+
+				if (!moved)
+				{
+					break;
+				}
+
+				if (CountIndex(_enumeratorIndex))
+				{
+					countChanged = true;
+				}
+
+				if (_enumeratorIndex >= _windowIndex)
+				{
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+				}
+			}
+
+			if (countChanged)
+			{
+				OnCountChanged();
+			}
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+				{
+					throw new InvalidOperationException();
+				}
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+				{
+					Current = value;
+				}
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.Clear()
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+							dispose.Dispose();
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+					move();
+				else
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+
+				if (!moved)
+					break;
+
+				if (CountIndex(_enumeratorIndex))
+					countChanged = true;
+
+				if (_enumeratorIndex >= _windowIndex)
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+			}
+
+			if (countChanged)
+				OnCountChanged();
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+					throw new InvalidOperationException();
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+					Current = value;
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.TryGetValue(int index, out object value)
+			=> TryGetValue(index, out value);
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { throw new NotSupportedException(); }
+		}
+
+		bool IList.IsReadOnly
+		{
+			get { return true; }
+		}
+
+		bool IList.IsFixedSize
+		{
+			get { return false; }
+		}
+
+		bool ICollection.IsSynchronized
+		{
+			get { return false; }
+		}
+
+		object ICollection.SyncRoot
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		int IList.Add(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Remove(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Insert(int index, object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.RemoveAt(int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Clear()
+After:
+					inRange = true;
+				};
+
+				if (syncContext != null)
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, getFromList, false);
+				}
+				else
+				{
+					getFromList();
+				}
+
+				value = indexedValue;
+				return inRange;
+			}
+
+			if (_collection != null && index >= _collection.Count)
+			{
+				return false;
+			}
+
+			if (_items != null)
+			{
+				bool found = _items.TryGetValue(index, out value);
+				if (found || _finished)
+				{
+					return found;
+				}
+			}
+
+			if (index >= _windowIndex + _windowSize)
+			{
+				int newIndex = index - _windowSize / 2;
+				ClearRange(_windowIndex, newIndex - _windowIndex);
+				_windowIndex = newIndex;
+			}
+			else if (index < _windowIndex)
+			{
+				int clearIndex = _windowIndex;
+				int clearSize = _windowSize;
+				if (clearIndex <= index + clearSize)
+				{
+					int diff = index + clearSize - clearIndex;
+					clearIndex += diff + 1;
+					clearSize -= diff;
+				}
+
+				ClearRange(clearIndex, clearSize);
+				_windowIndex = 0;
+
+				var dispose = _enumerator as IDisposable;
+				if (dispose != null)
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+				_enumeratorIndex = 0;
+			}
+
+			if (_enumerator == null)
+			{
+				_enumerator = ProxiedEnumerable.GetEnumerator();
+			}
+
+			if (_items == null)
+			{
+				_items = new Dictionary<int, object>();
+			}
+
+			var countChanged = false;
+			int end = _windowIndex + _windowSize;
+
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+						{
+							dispose.Dispose();
+						}
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+				{
+					move();
+				}
+				else
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+				}
+
+				if (!moved)
+				{
+					break;
+				}
+
+				if (CountIndex(_enumeratorIndex))
+				{
+					countChanged = true;
+				}
+
+				if (_enumeratorIndex >= _windowIndex)
+				{
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+				}
+			}
+
+			if (countChanged)
+			{
+				OnCountChanged();
+			}
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+				{
+					throw new InvalidOperationException();
+				}
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+				{
+					Current = value;
+				}
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.Clear()
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+							dispose.Dispose();
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+					move();
+				else
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+
+				if (!moved)
+					break;
+
+				if (CountIndex(_enumeratorIndex))
+					countChanged = true;
+
+				if (_enumeratorIndex >= _windowIndex)
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+			}
+
+			if (countChanged)
+				OnCountChanged();
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+					throw new InvalidOperationException();
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+					Current = value;
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.TryGetValue(int index, out object value)
+			=> TryGetValue(index, out value);
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { throw new NotSupportedException(); }
+		}
+
+		bool IList.IsReadOnly
+		{
+			get { return true; }
+		}
+
+		bool IList.IsFixedSize
+		{
+			get { return false; }
+		}
+
+		bool ICollection.IsSynchronized
+		{
+			get { return false; }
+		}
+
+		object ICollection.SyncRoot
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		int IList.Add(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Remove(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Insert(int index, object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.RemoveAt(int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Clear()
+After:
+					inRange = true;
+				};
+
+				if (syncContext != null)
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, getFromList, false);
+				}
+				else
+				{
+					getFromList();
+				}
+
+				value = indexedValue;
+				return inRange;
+			}
+
+			if (_collection != null && index >= _collection.Count)
+			{
+				return false;
+			}
+
+			if (_items != null)
+			{
+				bool found = _items.TryGetValue(index, out value);
+				if (found || _finished)
+				{
+					return found;
+				}
+			}
+
+			if (index >= _windowIndex + _windowSize)
+			{
+				int newIndex = index - _windowSize / 2;
+				ClearRange(_windowIndex, newIndex - _windowIndex);
+				_windowIndex = newIndex;
+			}
+			else if (index < _windowIndex)
+			{
+				int clearIndex = _windowIndex;
+				int clearSize = _windowSize;
+				if (clearIndex <= index + clearSize)
+				{
+					int diff = index + clearSize - clearIndex;
+					clearIndex += diff + 1;
+					clearSize -= diff;
+				}
+
+				ClearRange(clearIndex, clearSize);
+				_windowIndex = 0;
+
+				var dispose = _enumerator as IDisposable;
+				if (dispose != null)
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+				_enumeratorIndex = 0;
+			}
+
+			if (_enumerator == null)
+			{
+				_enumerator = ProxiedEnumerable.GetEnumerator();
+			}
+
+			if (_items == null)
+			{
+				_items = new Dictionary<int, object>();
+			}
+
+			var countChanged = false;
+			int end = _windowIndex + _windowSize;
+
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+						{
+							dispose.Dispose();
+						}
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+				{
+					move();
+				}
+				else
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+				}
+
+				if (!moved)
+				{
+					break;
+				}
+
+				if (CountIndex(_enumeratorIndex))
+				{
+					countChanged = true;
+				}
+
+				if (_enumeratorIndex >= _windowIndex)
+				{
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+				}
+			}
+
+			if (countChanged)
+			{
+				OnCountChanged();
+			}
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+				{
+					throw new InvalidOperationException();
+				}
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+				{
+					Current = value;
+				}
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.Clear()
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+							dispose.Dispose();
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+					move();
+				else
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+
+				if (!moved)
+					break;
+
+				if (CountIndex(_enumeratorIndex))
+					countChanged = true;
+
+				if (_enumeratorIndex >= _windowIndex)
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+			}
+
+			if (countChanged)
+				OnCountChanged();
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+					throw new InvalidOperationException();
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+					Current = value;
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.TryGetValue(int index, out object value)
+			=> TryGetValue(index, out value);
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { throw new NotSupportedException(); }
+		}
+
+		bool IList.IsReadOnly
+		{
+			get { return true; }
+		}
+
+		bool IList.IsFixedSize
+		{
+			get { return false; }
+		}
+
+		bool ICollection.IsSynchronized
+		{
+			get { return false; }
+		}
+
+		object ICollection.SyncRoot
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		int IList.Add(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Remove(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Insert(int index, object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.RemoveAt(int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Clear()
+After:
+					inRange = true;
+				};
+
+				if (syncContext != null)
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, getFromList, false);
+				}
+				else
+				{
+					getFromList();
+				}
+
+				value = indexedValue;
+				return inRange;
+			}
+
+			if (_collection != null && index >= _collection.Count)
+			{
+				return false;
+			}
+
+			if (_items != null)
+			{
+				bool found = _items.TryGetValue(index, out value);
+				if (found || _finished)
+				{
+					return found;
+				}
+			}
+
+			if (index >= _windowIndex + _windowSize)
+			{
+				int newIndex = index - _windowSize / 2;
+				ClearRange(_windowIndex, newIndex - _windowIndex);
+				_windowIndex = newIndex;
+			}
+			else if (index < _windowIndex)
+			{
+				int clearIndex = _windowIndex;
+				int clearSize = _windowSize;
+				if (clearIndex <= index + clearSize)
+				{
+					int diff = index + clearSize - clearIndex;
+					clearIndex += diff + 1;
+					clearSize -= diff;
+				}
+
+				ClearRange(clearIndex, clearSize);
+				_windowIndex = 0;
+
+				var dispose = _enumerator as IDisposable;
+				if (dispose != null)
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+				_enumeratorIndex = 0;
+			}
+
+			if (_enumerator == null)
+			{
+				_enumerator = ProxiedEnumerable.GetEnumerator();
+			}
+
+			if (_items == null)
+			{
+				_items = new Dictionary<int, object>();
+			}
+
+			var countChanged = false;
+			int end = _windowIndex + _windowSize;
+
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+						{
+							dispose.Dispose();
+						}
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+				{
+					move();
+				}
+				else
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+				}
+
+				if (!moved)
+				{
+					break;
+				}
+
+				if (CountIndex(_enumeratorIndex))
+				{
+					countChanged = true;
+				}
+
+				if (_enumeratorIndex >= _windowIndex)
+				{
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+				}
+			}
+
+			if (countChanged)
+			{
+				OnCountChanged();
+			}
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+				{
+					throw new InvalidOperationException();
+				}
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+				{
+					Current = value;
+				}
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.Clear()
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+							dispose.Dispose();
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+					move();
+				else
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+
+				if (!moved)
+					break;
+
+				if (CountIndex(_enumeratorIndex))
+					countChanged = true;
+
+				if (_enumeratorIndex >= _windowIndex)
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+			}
+
+			if (countChanged)
+				OnCountChanged();
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+					throw new InvalidOperationException();
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+					Current = value;
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.TryGetValue(int index, out object value)
+			=> TryGetValue(index, out value);
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { throw new NotSupportedException(); }
+		}
+
+		bool IList.IsReadOnly
+		{
+			get { return true; }
+		}
+
+		bool IList.IsFixedSize
+		{
+			get { return false; }
+		}
+
+		bool ICollection.IsSynchronized
+		{
+			get { return false; }
+		}
+
+		object ICollection.SyncRoot
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		int IList.Add(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Remove(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Insert(int index, object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.RemoveAt(int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Clear()
+After:
+					inRange = true;
+				};
+
+				if (syncContext != null)
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, getFromList, false);
+				}
+				else
+				{
+					getFromList();
+				}
+
+				value = indexedValue;
+				return inRange;
+			}
+
+			if (_collection != null && index >= _collection.Count)
+			{
+				return false;
+			}
+
+			if (_items != null)
+			{
+				bool found = _items.TryGetValue(index, out value);
+				if (found || _finished)
+				{
+					return found;
+				}
+			}
+
+			if (index >= _windowIndex + _windowSize)
+			{
+				int newIndex = index - _windowSize / 2;
+				ClearRange(_windowIndex, newIndex - _windowIndex);
+				_windowIndex = newIndex;
+			}
+			else if (index < _windowIndex)
+			{
+				int clearIndex = _windowIndex;
+				int clearSize = _windowSize;
+				if (clearIndex <= index + clearSize)
+				{
+					int diff = index + clearSize - clearIndex;
+					clearIndex += diff + 1;
+					clearSize -= diff;
+				}
+
+				ClearRange(clearIndex, clearSize);
+				_windowIndex = 0;
+
+				var dispose = _enumerator as IDisposable;
+				if (dispose != null)
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+				_enumeratorIndex = 0;
+			}
+
+			if (_enumerator == null)
+			{
+				_enumerator = ProxiedEnumerable.GetEnumerator();
+			}
+
+			if (_items == null)
+			{
+				_items = new Dictionary<int, object>();
+			}
+
+			var countChanged = false;
+			int end = _windowIndex + _windowSize;
+
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+						{
+							dispose.Dispose();
+						}
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+				{
+					move();
+				}
+				else
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+				}
+
+				if (!moved)
+				{
+					break;
+				}
+
+				if (CountIndex(_enumeratorIndex))
+				{
+					countChanged = true;
+				}
+
+				if (_enumeratorIndex >= _windowIndex)
+				{
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+				}
+			}
+
+			if (countChanged)
+			{
+				OnCountChanged();
+			}
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+				{
+					throw new InvalidOperationException();
+				}
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+				{
+					Current = value;
+				}
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.Clear()
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+							dispose.Dispose();
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+					move();
+				else
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+
+				if (!moved)
+					break;
+
+				if (CountIndex(_enumeratorIndex))
+					countChanged = true;
+
+				if (_enumeratorIndex >= _windowIndex)
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+			}
+
+			if (countChanged)
+				OnCountChanged();
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+					throw new InvalidOperationException();
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+					Current = value;
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.TryGetValue(int index, out object value)
+			=> TryGetValue(index, out value);
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { throw new NotSupportedException(); }
+		}
+
+		bool IList.IsReadOnly
+		{
+			get { return true; }
+		}
+
+		bool IList.IsFixedSize
+		{
+			get { return false; }
+		}
+
+		bool ICollection.IsSynchronized
+		{
+			get { return false; }
+		}
+
+		object ICollection.SyncRoot
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		int IList.Add(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Remove(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Insert(int index, object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.RemoveAt(int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Clear()
+After:
+					inRange = true;
+				};
+
+				if (syncContext != null)
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, getFromList, false);
+				}
+				else
+				{
+					getFromList();
+				}
+
+				value = indexedValue;
+				return inRange;
+			}
+
+			if (_collection != null && index >= _collection.Count)
+			{
+				return false;
+			}
+
+			if (_items != null)
+			{
+				bool found = _items.TryGetValue(index, out value);
+				if (found || _finished)
+				{
+					return found;
+				}
+			}
+
+			if (index >= _windowIndex + _windowSize)
+			{
+				int newIndex = index - _windowSize / 2;
+				ClearRange(_windowIndex, newIndex - _windowIndex);
+				_windowIndex = newIndex;
+			}
+			else if (index < _windowIndex)
+			{
+				int clearIndex = _windowIndex;
+				int clearSize = _windowSize;
+				if (clearIndex <= index + clearSize)
+				{
+					int diff = index + clearSize - clearIndex;
+					clearIndex += diff + 1;
+					clearSize -= diff;
+				}
+
+				ClearRange(clearIndex, clearSize);
+				_windowIndex = 0;
+
+				var dispose = _enumerator as IDisposable;
+				if (dispose != null)
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+				_enumeratorIndex = 0;
+			}
+
+			if (_enumerator == null)
+			{
+				_enumerator = ProxiedEnumerable.GetEnumerator();
+			}
+
+			if (_items == null)
+			{
+				_items = new Dictionary<int, object>();
+			}
+
+			var countChanged = false;
+			int end = _windowIndex + _windowSize;
+
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+						{
+							dispose.Dispose();
+						}
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+				{
+					move();
+				}
+				else
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+				}
+
+				if (!moved)
+				{
+					break;
+				}
+
+				if (CountIndex(_enumeratorIndex))
+				{
+					countChanged = true;
+				}
+
+				if (_enumeratorIndex >= _windowIndex)
+				{
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+				}
+			}
+
+			if (countChanged)
+			{
+				OnCountChanged();
+			}
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+				{
+					throw new InvalidOperationException();
+				}
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+				{
+					Current = value;
+				}
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.Clear()
+*/
+					inRange = true;
+				};
+
+				if (syncContext != null)
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, getFromList, false);
+				}
+				else
+				{
+					getFromList();
+				}
+
+				value = indexedValue;
+				return inRange;
+			}
+
+			if (_collection != null && index >= _collection.Count)
+			{
+				return false;
+			}
+
+			if (_items != null)
+			{
+				bool found = _items.TryGetValue(index, out value);
+				if (found || _finished)
+				{
+					return found;
+				}
+			}
+
+			if (index >= _windowIndex + _windowSize)
+			{
+				int newIndex = index - _windowSize / 2;
+				ClearRange(_windowIndex, newIndex - _windowIndex);
+				_windowIndex = newIndex;
+			}
+			else if (index < _windowIndex)
+			{
+				int clearIndex = _windowIndex;
+				int clearSize = _windowSize;
+				if (clearIndex <= index + clearSize)
+				{
+					int diff = index + clearSize - clearIndex;
+					clearIndex += diff + 1;
+					clearSize -= diff;
+				}
+
+				ClearRange(clearIndex, clearSize);
+				_windowIndex = 0;
+
+				var dispose = _enumerator as IDisposable;
+				if (dispose != null)
+				{
+					dispose.Dispose();
+				}
+
+				_enumerator = null;
+				_enumeratorIndex = 0;
+			}
+
+			if (_enumerator == null)
+			{
+				_enumerator = ProxiedEnumerable.GetEnumerator();
+			}
+
+			if (_items == null)
+			{
+				_items = new Dictionary<int, object>();
+			}
+
+			var countChanged = false;
+			int end = _windowIndex + _windowSize;
+
+			for (; _enumeratorIndex < end; _enumeratorIndex++)
+			{
+				var moved = false;
+				Action move = () =>
+				{
+					try
+					{
+						moved = _enumerator.MoveNext();
+					}
+					catch (InvalidOperationException ioex)
+					{
+						throw new InvalidOperationException("You must call UpdateNonNotifyingList() after updating a list that does not implement INotifyCollectionChanged", ioex);
+					}
+
+					if (!moved)
+					{
+						var dispose = _enumerator as IDisposable;
+						if (dispose != null)
+						{
+							dispose.Dispose();
+						}
+
+						_enumerator = null;
+						_enumeratorIndex = 0;
+						_finished = true;
+					}
+				};
+
+				if (syncContext == null)
+				{
+					move();
+				}
+				else
+				{
+					syncContext.Callback(ProxiedEnumerable, syncContext.Context, move, false);
+				}
+
+				if (!moved)
+				{
+					break;
+				}
+
+				if (CountIndex(_enumeratorIndex))
+				{
+					countChanged = true;
+				}
+
+				if (_enumeratorIndex >= _windowIndex)
+				{
+					_items.Add(_enumeratorIndex, _enumerator.Current);
+				}
+			}
+
+			if (countChanged)
+			{
+				OnCountChanged();
+			}
+
+			return _items.TryGetValue(index, out value);
+		}
+
+		class ProxyEnumerator : IEnumerator<object>
+		{
+			readonly ListProxy _proxy;
+			readonly int _version;
+
+			int _index;
+
+			public ProxyEnumerator(ListProxy proxy)
+			{
+				_proxy = proxy;
+				_version = proxy._version;
+			}
+
+			public void Dispose()
+			{
+			}
+
+			public bool MoveNext()
+			{
+				if (_proxy._version != _version)
+				{
+					throw new InvalidOperationException();
+				}
+
+				object value;
+				bool next = _proxy.TryGetValue(_index++, out value);
+				if (next)
+				{
+					Current = value;
+				}
+
+				return next;
+			}
+
+			public void Reset()
+			{
+				_index = 0;
+				Current = null;
+			}
+
+			public object Current { get; private set; }
+		}
+
+		#region IList
+
+		bool IListProxy.TryGetValue(int index, out object value)
+			=> TryGetValue(index, out value);
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { throw new NotSupportedException(); }
+		}
+
+		bool IList.IsReadOnly
+		{
+			get { return true; }
+		}
+
+		bool IList.IsFixedSize
+		{
+			get { return false; }
+		}
+
+		bool ICollection.IsSynchronized
+		{
+			get { return false; }
+		}
+
+		object ICollection.SyncRoot
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		int IList.Add(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Remove(object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.Insert(int index, object item)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.RemoveAt(int index)
+		{
+			throw new NotSupportedException();
+		}
+
+		void IList.TryGetValue(int index, out object value)
 			=> TryGetValue(index, out value);
 
 		object IList.this[int index]

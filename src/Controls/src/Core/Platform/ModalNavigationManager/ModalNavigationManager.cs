@@ -31,7 +31,10 @@ namespace Microsoft.Maui.Controls.Platform
 				var currentPage = _modalPages.Count > 0 ? _modalPages[_modalPages.Count - 1].Page : _window.Page;
 
 				if (currentPage is Shell shell)
+				{
+				{
 					currentPage = shell.CurrentPage;
+				}
 
 				return currentPage;
 			}
@@ -49,7 +52,9 @@ namespace Microsoft.Maui.Controls.Platform
 			_window.PropertyChanged += (_, args) =>
 			{
 				if (args.Is(Window.PageProperty))
+				{
 					SettingNewPage();
+				}
 			};
 
 			InitializePlatform();
@@ -119,7 +124,10 @@ namespace Microsoft.Maui.Controls.Platform
 		async Task SyncPlatformModalStackAsync()
 		{
 			if (!IsModalReady || syncing)
+			{
+			{
 				return;
+			}
 
 			bool syncAgain = false;
 
@@ -139,6 +147,9 @@ namespace Microsoft.Maui.Controls.Platform
 
 				// This means the modal stacks are already synced so we don't have to do anything
 				if (_platformModalPages.Count == _modalPages.Count && popTo == _platformModalPages.Count)
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
 					return;
 
 				// This ensures that appearing has fired on the final page that will be visible after 
@@ -147,6 +158,56 @@ namespace Microsoft.Maui.Controls.Platform
 
 				// Pop platform modal pages until we get to the point where the xplat expectation
 				// matches the platform modals
+				if (_platformModalPages.Count > popTo && IsModalReady)
+				{
+					bool animated = false;
+					if (_modalPages.TryGetValue(CurrentPlatformModalPage, out var request))
+					{
+						_modalPages.Remove(CurrentPlatformModalPage);
+						animated = request.IsAnimated;
+					}
+
+					var page = await PopModalPlatformAsync(animated);
+					page.Parent?.RemoveLogicalChild(page);
+					syncAgain = true;
+				}
+After:
+				{
+					return;
+				}
+
+				// This ensures that appearing has fired on the final page that will be visible after 
+				// the sync has finished
+				CurrentPage?.SendAppearing();
+
+				// Pop platform modal pages until we get to the point where the xplat expectation
+				// matches the platform modals
+*/
+				{
+				{
+					return;
+				}
+
+				// This ensures that appearing has fired on the final page that will be visible after 
+				// the sync has finished
+				CurrentPage?.SendAppearing();
+
+				// Pop platform modal pages until we get to the point where the xplat expectation
+				// matches the platform modals
+				if (_platformModalPages.Count > popTo && IsModalReady)
+				{
+					bool animated = false;
+					if (_modalPages.TryGetValue(CurrentPlatformModalPage, out var request))
+					{
+						_modalPages.Remove(CurrentPlatformModalPage);
+						animated = request.IsAnimated;
+					}
+
+					var page = await PopModalPlatformAsync(animated);
+					page.Parent?.RemoveLogicalChild(page);
+					syncAgain = true;
+				}
+
 				if (_platformModalPages.Count > popTo && IsModalReady)
 				{
 					bool animated = false;
@@ -196,7 +257,285 @@ namespace Microsoft.Maui.Controls.Platform
 		public async Task<Page?> PopModalAsync(bool animated)
 		{
 			if (_modalPages.Count <= 0)
+			{
 				throw new InvalidOperationException("PopModalAsync failed because modal stack is currently empty.");
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+
+			if (_window.OnModalPopping(modal))
+			{
+				_window.OnPopCanceled();
+				return null;
+			}
+
+			_modalPages.Remove(modal);
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatingFrom(new NavigatingFromEventArgs());
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+			if (_window.Page is Shell shell)
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped(modal);
+After:
+			}
+
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+
+			if (_window.OnModalPopping(modal))
+			{
+				_window.OnPopCanceled();
+				return null;
+			}
+
+			_modalPages.Remove(modal);
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatingFrom(new NavigatingFromEventArgs());
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+			if (_window.Page is Shell shell)
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped(modal);
+After:
+			}
+
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+
+			if (_window.OnModalPopping(modal))
+			{
+				_window.OnPopCanceled();
+				return null;
+			}
+
+			_modalPages.Remove(modal);
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatingFrom(new NavigatingFromEventArgs());
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+			if (_window.Page is Shell shell)
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped(modal);
+After:
+			}
+
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+
+			if (_window.OnModalPopping(modal))
+			{
+				_window.OnPopCanceled();
+				return null;
+			}
+
+			_modalPages.Remove(modal);
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatingFrom(new NavigatingFromEventArgs());
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+			if (_window.Page is Shell shell)
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped(modal);
+After:
+			}
+
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+
+			if (_window.OnModalPopping(modal))
+			{
+				_window.OnPopCanceled();
+				return null;
+			}
+
+			_modalPages.Remove(modal);
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatingFrom(new NavigatingFromEventArgs());
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+			if (_window.Page is Shell shell)
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped(modal);
+After:
+			}
+
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+
+			if (_window.OnModalPopping(modal))
+			{
+				_window.OnPopCanceled();
+				return null;
+			}
+
+			_modalPages.Remove(modal);
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatingFrom(new NavigatingFromEventArgs());
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+			if (_window.Page is Shell shell)
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped(modal);
+After:
+			}
+
+			Page modal = _modalPages[_modalPages.Count - 1].Page;
+*/
+			}
 
 			Page modal = _modalPages[_modalPages.Count - 1].Page;
 
@@ -237,6 +576,100 @@ namespace Microsoft.Maui.Controls.Platform
 			modal.Parent?.RemoveLogicalChild(modal);
 			_window.OnModalPopped(modal);
 
+			if (_window.OnModalPopping(modal))
+			{
+				_window.OnPopCanceled();
+				return null;
+			}
+
+			_modalPages.Remove(modal);
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatingFrom(new NavigatingFromEventArgs());
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+After:
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+After:
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+After:
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+After:
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+*/
+			}
+
+			modal.SendDisappearing();
+
+			// With shell we want to make sure to only fire the appearing event
+			// on the final page that will be visible after the pop has completed
+			if (_window.Page is Shell shell)
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
+				SyncModalStackWhenPlatformIsReady();
+After:
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped();
+
 			if (FireLifeCycleEvents)
 			{
 				modal.SendNavigatedFrom(new NavigatedFromEventArgs(CurrentPage));
@@ -244,7 +677,188 @@ namespace Microsoft.Maui.Controls.Platform
 			}
 
 			if (!isPlatformReady)
+			{
 				SyncModalStackWhenPlatformIsReady();
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+				SyncModalStackWhenPlatformIsReady();
+After:
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped();
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatedFrom(new NavigatedFromEventArgs(CurrentPage));
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+
+			if (!isPlatformReady)
+			{
+				SyncModalStackWhenPlatformIsReady();
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				SyncModalStackWhenPlatformIsReady();
+After:
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped();
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatedFrom(new NavigatedFromEventArgs(CurrentPage));
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+
+			if (!isPlatformReady)
+			{
+				SyncModalStackWhenPlatformIsReady();
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				SyncModalStackWhenPlatformIsReady();
+After:
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped();
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatedFrom(new NavigatedFromEventArgs(CurrentPage));
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+
+			if (!isPlatformReady)
+			{
+				SyncModalStackWhenPlatformIsReady();
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				SyncModalStackWhenPlatformIsReady();
+After:
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped();
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatedFrom(new NavigatedFromEventArgs(CurrentPage));
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+
+			if (!isPlatformReady)
+			{
+				SyncModalStackWhenPlatformIsReady();
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				SyncModalStackWhenPlatformIsReady();
+After:
+			{
+				if (!shell.CurrentItem.CurrentItem.IsPoppingModalStack)
+				{
+					CurrentPage?.SendAppearing();
+				}
+			}
+			else
+			{
+				CurrentPage?.SendAppearing();
+			}
+
+			bool isPlatformReady = IsModalReady;
+			Task popTask =
+				(isPlatformReady && !syncing) ? PopModalPlatformAsync(animated) : Task.CompletedTask;
+
+			await popTask;
+			modal.Parent?.RemoveLogicalChild(modal);
+			_window.OnModalPopped();
+
+			if (FireLifeCycleEvents)
+			{
+				modal.SendNavigatedFrom(new NavigatedFromEventArgs(CurrentPage));
+				CurrentPage?.SendNavigatedTo(new NavigatedToEventArgs(modal));
+			}
+
+			if (!isPlatformReady)
+			{
+				SyncModalStackWhenPlatformIsReady();
+			}
+*/
+			{
+				SyncModalStackWhenPlatformIsReady(modal);
+			}
 
 			return modal;
 		}
@@ -302,7 +916,11 @@ namespace Microsoft.Maui.Controls.Platform
 			_window.OnModalPushed(modal);
 
 			if (!isPlatformReady)
+			{
+			{
 				SyncModalStackWhenPlatformIsReady();
+			}
+			}
 		}
 
 		void SettingNewPage()
@@ -354,10 +972,16 @@ namespace Microsoft.Maui.Controls.Platform
 		void ClearModalPages(bool xplat = false, bool platform = false)
 		{
 			if (xplat)
+			{
 				_modalPages.Clear();
+			}
 
 			if (platform)
+			{
+			{
 				_platformModalPages.Clear();
+			}
+			}
 		}
 
 		// Windows and Android have basically the same requirement that
@@ -438,7 +1062,9 @@ namespace Microsoft.Maui.Controls.Platform
 					&& CurrentPlatformPage.IsLoadedOnPlatform();
 
 				if (result)
+				{
 					DisconnectPlatformPageWatchingForLoaded();
+				}
 
 				return result;
 			}

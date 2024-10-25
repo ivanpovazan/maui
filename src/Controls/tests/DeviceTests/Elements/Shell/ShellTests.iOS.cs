@@ -392,10 +392,29 @@ namespace Microsoft.Maui.DeviceTests
 			await OnNavigatedToAsync(shell.CurrentPage);
 
 			if (shellItem != shell.CurrentItem)
+			{
 				throw new NotImplementedException();
+			}
 
 			if (shellSection != shell.CurrentItem.CurrentItem)
+			{
 				throw new NotImplementedException();
+
+/* Unmerged change from project 'Controls.DeviceTests(net8.0-maccatalyst)'
+Before:
+			var pagerParent = (shell.CurrentPage.Handler as IPlatformViewHandler)
+				.PlatformView.FindParent(x => x.NextResponder is UITabBarController);
+After:
+			}
+*/
+
+/* Unmerged change from project 'Controls.DeviceTests(net8.0-maccatalyst)'
+Before:
+			var tabController = pagerParent.NextResponder as ShellItemRenderer;
+After:
+			var pagerParent = pagerParent.NextResponder as ShellItemRenderer;
+*/
+			}
 
 			var pagerParent = (shell.CurrentPage.Handler as IPlatformViewHandler)
 				.PlatformView.FindParent(x => x.NextResponder is UITabBarController);

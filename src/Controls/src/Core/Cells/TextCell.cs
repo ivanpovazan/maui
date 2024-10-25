@@ -15,7 +15,10 @@ namespace Microsoft.Maui.Controls
 				var textCell = (TextCell)bindable;
 				var oldcommand = (ICommand)oldvalue;
 				if (oldcommand != null)
+				{
 					oldcommand.CanExecuteChanged -= textCell.OnCommandCanExecuteChanged;
+				}
+				}
 			}, propertyChanged: (bindable, oldvalue, newvalue) =>
 			{
 				var textCell = (TextCell)bindable;

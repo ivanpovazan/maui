@@ -41,11 +41,104 @@ namespace Microsoft.Maui.Controls.Xaml
 			var parentElement = parentNode as IElementNode;
 			XmlName propertyName;
 			if (!ApplyPropertiesVisitor.TryGetPropertyName(markupnode, parentNode, out propertyName))
+			{
 				return;
-			if (Skips.Contains(propertyName))
-				return;
+
+/* Unmerged change from project 'Controls.Xaml(net8.0)'
+Before:
 			if (parentElement.SkipProperties.Contains(propertyName))
 				return;
+
+			var markupString = markupnode.MarkupString;
+			var node =
+				ParseExpression(ref markupString, markupnode.NamespaceResolver, markupnode, markupnode, parentNode) as IElementNode;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-ios)'
+Before:
+			if (parentElement.SkipProperties.Contains(propertyName))
+				return;
+
+			var markupString = markupnode.MarkupString;
+			var node =
+				ParseExpression(ref markupString, markupnode.NamespaceResolver, markupnode, markupnode, parentNode) as IElementNode;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-maccatalyst)'
+Before:
+			if (parentElement.SkipProperties.Contains(propertyName))
+				return;
+
+			var markupString = markupnode.MarkupString;
+			var node =
+				ParseExpression(ref markupString, markupnode.NamespaceResolver, markupnode, markupnode, parentNode) as IElementNode;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-android)'
+Before:
+			if (parentElement.SkipProperties.Contains(propertyName))
+				return;
+
+			var markupString = markupnode.MarkupString;
+			var node =
+				ParseExpression(ref markupString, markupnode.NamespaceResolver, markupnode, markupnode, parentNode) as IElementNode;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-windows10.0.19041)'
+Before:
+			if (parentElement.SkipProperties.Contains(propertyName))
+				return;
+
+			var markupString = markupnode.MarkupString;
+			var node =
+				ParseExpression(ref markupString, markupnode.NamespaceResolver, markupnode, markupnode, parentNode) as IElementNode;
+After:
+			}
+*/
+
+/* Unmerged change from project 'Controls.Xaml(net8.0-windows10.0.20348)'
+Before:
+			if (parentElement.SkipProperties.Contains(propertyName))
+				return;
+
+			var markupString = markupnode.MarkupString;
+			var node =
+				ParseExpression(ref markupString, markupnode.NamespaceResolver, markupnode, markupnode, parentNode) as IElementNode;
+After:
+			}
+*/
+			}
+
+			if (Skips.Contains(propertyName))
+			{
+				return;
+			}
+
+			if (parentElement.SkipProperties.Contains(propertyName))
+			{
+				return;
+			}
+
+			var markupString = markupnode.MarkupString;
+			var node =
+				ParseExpression(ref markupString, markupnode.NamespaceResolver, markupnode, markupnode, parentNode) as IElementNode;
+			if (Skips.Contains(propertyName))
+			{
+				return;
+			}
+
+			if (parentElement.SkipProperties.Contains(propertyName))
+			{
+				return;
+			}
 
 			var markupString = markupnode.MarkupString;
 			var node =
@@ -73,7 +166,9 @@ namespace Microsoft.Maui.Controls.Xaml
 			INode parentNode)
 		{
 			if (expression.StartsWith("{}", StringComparison.Ordinal))
+			{
 				return new ValueNode(expression.Substring(2), null);
+			}
 
 			if (expression[expression.Length - 1] != '}')
 			{
@@ -87,7 +182,9 @@ namespace Microsoft.Maui.Controls.Xaml
 			}
 
 			if (!MarkupExpressionParser.MatchMarkup(out var match, expression, out var len))
+			{
 				throw new Exception();
+			}
 
 			expression = expression.Substring(len).TrimStart();
 			if (expression.Length == 0)
@@ -118,10 +215,15 @@ namespace Microsoft.Maui.Controls.Xaml
 			public INode Parse(string match, ref string remaining, IServiceProvider serviceProvider)
 			{
 				if (!(serviceProvider.GetService(typeof(IXmlNamespaceResolver)) is IXmlNamespaceResolver nsResolver))
+				{
 					throw new ArgumentException();
+				}
+
 				IXmlLineInfo xmlLineInfo = null;
 				if (serviceProvider.GetService(typeof(IXmlLineInfoProvider)) is IXmlLineInfoProvider xmlLineInfoProvider)
+				{
 					xmlLineInfo = xmlLineInfoProvider.XmlLineInfo;
+				}
 
 				var (prefix, name) = ParseName(match);
 
@@ -156,7 +258,9 @@ namespace Microsoft.Maui.Controls.Xaml
 								propertyName));
 
 							if (childname.NamespaceURI == null && childname.LocalName == null)
+							{
 								continue;
+							}
 						}
 
 						if (childname == XmlName.xTypeArguments)
@@ -175,7 +279,9 @@ namespace Microsoft.Maui.Controls.Xaml
 
 
 				if (!(serviceProvider.GetService(typeof(IXamlTypeResolver)) is XamlTypeResolver typeResolver))
+				{
 					throw new NotSupportedException();
+				}
 
 				var xmltype = new XmlType(namespaceuri, name + "Extension", typeArguments);
 

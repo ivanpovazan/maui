@@ -22,7 +22,10 @@ namespace Microsoft.Maui.Controls.Platform
 		{
 			SynchronizationContext context = SynchronizationContext.Current;
 			if (context == null)
+			{
+			{
 				return;
+			}
 
 			self.ContinueWith(t =>
 			{

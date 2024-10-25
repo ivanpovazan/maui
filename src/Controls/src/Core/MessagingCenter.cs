@@ -115,7 +115,10 @@ namespace Microsoft.Maui.Controls
 		void IMessagingCenter.Send<TSender, TArgs>(TSender sender, string message, TArgs args)
 		{
 			if (sender == null)
+			{
 				throw new ArgumentNullException(nameof(sender));
+			}
+
 			InnerSend(message, typeof(TSender), typeof(TArgs), sender, args);
 		}
 
@@ -127,7 +130,550 @@ namespace Microsoft.Maui.Controls
 		void IMessagingCenter.Send<TSender>(TSender sender, string message)
 		{
 			if (sender == null)
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
 				throw new ArgumentNullException(nameof(sender));
+			InnerSend(message, typeof(TSender), null, sender, null);
+After:
+			{
+				throw new ArgumentNullException(nameof(sender));
+			}
+
+			InnerSend(message, typeof(TSender), null, sender, null);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+				throw new ArgumentNullException(nameof(sender));
+			InnerSend(message, typeof(TSender), null, sender, null);
+After:
+			{
+				throw new ArgumentNullException(nameof(sender));
+			}
+
+			InnerSend(message, typeof(TSender), null, sender, null);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				throw new ArgumentNullException(nameof(sender));
+			InnerSend(message, typeof(TSender), null, sender, null);
+After:
+			{
+				throw new ArgumentNullException(nameof(sender));
+			}
+
+			InnerSend(message, typeof(TSender), null, sender, null);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				throw new ArgumentNullException(nameof(sender));
+			InnerSend(message, typeof(TSender), null, sender, null);
+After:
+			{
+				throw new ArgumentNullException(nameof(sender));
+			}
+
+			InnerSend(message, typeof(TSender), null, sender, null);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				throw new ArgumentNullException(nameof(sender));
+			InnerSend(message, typeof(TSender), null, sender, null);
+After:
+			{
+				throw new ArgumentNullException(nameof(sender));
+			}
+
+			InnerSend(message, typeof(TSender), null, sender, null);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				throw new ArgumentNullException(nameof(sender));
+			InnerSend(message, typeof(TSender), null, sender, null);
+After:
+			{
+				throw new ArgumentNullException(nameof(sender));
+			}
+
+			InnerSend(message, typeof(TSender), null, sender, null);
+*/
+			
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), typeof(TArgs), target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				throw new ArgumentNullException(nameof(subscriber));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
+
+			var target = callback.Target;
+
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+After:
+			{
+				throw new ArgumentNullException(nameof(subscriber));
+			}
+
+			if (callback == null)
+			{
+				throw new ArgumentNullException(nameof(callback));
+			}
+
+			var target = callback.Target;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+After:
+			Filter filter = sender =>
+			{
+				var send = (TSender)sender;
+				return (source == null || send == source);
+			};
+
+			InnerSubscribe(subscriber, message, typeof(TSender), null, target, callback.GetMethodInfo(), filter);
+*/
+{
+				throw new ArgumentNullException(nameof(sender));
+			}
+
 			InnerSend(message, typeof(TSender), null, sender, null);
 		}
 
@@ -139,9 +685,14 @@ namespace Microsoft.Maui.Controls
 		void IMessagingCenter.Subscribe<TSender, TArgs>(object subscriber, string message, Action<TSender, TArgs> callback, TSender source)
 		{
 			if (subscriber == null)
+			{
 				throw new ArgumentNullException(nameof(subscriber));
+			}
+
 			if (callback == null)
+			{
 				throw new ArgumentNullException(nameof(callback));
+			}
 
 			var target = callback.Target;
 
@@ -162,9 +713,14 @@ namespace Microsoft.Maui.Controls
 		void IMessagingCenter.Subscribe<TSender>(object subscriber, string message, Action<TSender> callback, TSender source)
 		{
 			if (subscriber == null)
+			{
 				throw new ArgumentNullException(nameof(subscriber));
+			}
+
 			if (callback == null)
+			{
 				throw new ArgumentNullException(nameof(callback));
+			}
 
 			var target = callback.Target;
 
@@ -182,7 +738,165 @@ namespace Microsoft.Maui.Controls
 			Instance.Unsubscribe<TSender, TArgs>(subscriber, message);
 		}
 
-		void IMessagingCenter.Unsubscribe<TSender, TArgs>(object subscriber, string message)
+		void IMessagingCenter.Unsubscribe<TSender
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
+				throw new ArgumentNullException(nameof(message));
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+				return;
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+				return; // should not be reachable
+After:
+			{
+				throw new ArgumentNullException(nameof(message));
+			}
+
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+			{
+				return;
+			}
+
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+			{
+				return; // should not be reachable
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+				throw new ArgumentNullException(nameof(message));
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+				return;
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+				return; // should not be reachable
+After:
+			{
+				throw new ArgumentNullException(nameof(message));
+			}
+
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+			{
+				return;
+			}
+
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+			{
+				return; // should not be reachable
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+				throw new ArgumentNullException(nameof(message));
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+				return;
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+				return; // should not be reachable
+After:
+			{
+				throw new ArgumentNullException(nameof(message));
+			}
+
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+			{
+				return;
+			}
+
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+			{
+				return; // should not be reachable
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-android)'
+Before:
+				throw new ArgumentNullException(nameof(message));
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+				return;
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+				return; // should not be reachable
+After:
+			{
+				throw new ArgumentNullException(nameof(message));
+			}
+
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+			{
+				return;
+			}
+
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+			{
+				return; // should not be reachable
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+				throw new ArgumentNullException(nameof(message));
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+				return;
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+				return; // should not be reachable
+After:
+			{
+				throw new ArgumentNullException(nameof(message));
+			}
+
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+			{
+				return;
+			}
+
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+			{
+				return; // should not be reachable
+			}
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+				throw new ArgumentNullException(nameof(message));
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+				return;
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+				return; // should not be reachable
+After:
+			{
+				throw new ArgumentNullException(nameof(message));
+			}
+
+			var key = new Sender(message, senderType, argType);
+			if (!_subscriptions.ContainsKey(key))
+			{
+				return;
+			}
+
+			List<Subscription> subcriptions = _subscriptions[key];
+			if (subcriptions == null || !subcriptions.Any())
+			{
+				return; // should not be reachable
+			}
+*/
+, TArgs>(object subscriber, string message)
 		{
 			InnerUnsubscribe(message, typeof(TSender), typeof(TArgs), subscriber);
 		}
@@ -200,13 +914,22 @@ namespace Microsoft.Maui.Controls
 		void InnerSend(string message, Type senderType, Type argType, object sender, object args)
 		{
 			if (message == null)
+			{
 				throw new ArgumentNullException(nameof(message));
+			}
+
 			var key = new Sender(message, senderType, argType);
 			if (!_subscriptions.ContainsKey(key))
+			{
 				return;
+			}
+
 			List<Subscription> subcriptions = _subscriptions[key];
 			if (subcriptions == null || !subcriptions.Any())
+			{
 				return; // should not be reachable
+			}
+			}
 
 			// ok so this code looks a bit funky but here is the gist of the problem. It is possible that in the course
 			// of executing the callbacks for this message someone will subscribe/unsubscribe from the same message in
@@ -226,7 +949,10 @@ namespace Microsoft.Maui.Controls
 		void InnerSubscribe(object subscriber, string message, Type senderType, Type argType, object target, MethodInfo methodInfo, Filter filter)
 		{
 			if (message == null)
+			{
 				throw new ArgumentNullException(nameof(message));
+			}
+
 			var key = new Sender(message, senderType, argType);
 			var value = new Subscription(subscriber, target, methodInfo, filter);
 			if (_subscriptions.ContainsKey(key))
@@ -243,16 +969,27 @@ namespace Microsoft.Maui.Controls
 		void InnerUnsubscribe(string message, Type senderType, Type argType, object subscriber)
 		{
 			if (subscriber == null)
+			{
 				throw new ArgumentNullException(nameof(subscriber));
+			}
+
 			if (message == null)
+			{
 				throw new ArgumentNullException(nameof(message));
+			}
 
 			var key = new Sender(message, senderType, argType);
 			if (!_subscriptions.ContainsKey(key))
+			{
+			{
 				return;
+			}
+
 			_subscriptions[key].RemoveAll(sub => sub.CanBeRemoved() || sub.Subscriber.Target == subscriber);
 			if (!_subscriptions[key].Any())
+			{
 				_subscriptions.Remove(key);
+			}
 		}
 
 		// This is a bit gross; it only exists to support the unit tests in PageTests

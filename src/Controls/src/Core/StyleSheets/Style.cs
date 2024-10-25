@@ -37,13 +37,19 @@ namespace Microsoft.Maui.Controls.StyleSheets
 					case ';':
 						reader.Read();
 						if (!string.IsNullOrEmpty(propertyName) && !string.IsNullOrEmpty(propertyValue))
+						{
 							style.Declarations.Add(propertyName, propertyValue);
+						}
+
 						propertyName = propertyValue = null;
 						readingName = true;
 						reader.SkipWhiteSpaces();
 						break;
 					default:
 						if ((char)p == stopChar)
+
+/* Unmerged change from project 'Controls.Core(net8.0)'
+Before:
 							return style;
 
 						if (readingName)
@@ -58,26 +64,163 @@ namespace Microsoft.Maui.Controls.StyleSheets
 				}
 			}
 			return style;
+After:
+						{
+							return style;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-ios)'
+Before:
+							return style;
+
+						if (readingName)
+						{
+							propertyName = reader.ReadIdent();
+							if (propertyName == null)
+								throw new Exception();
+						}
+						else
+							propertyValue = reader.ReadUntil(stopChar, ';', ':');
+						break;
+				}
+			}
+			return style;
+After:
+						{
+							return style;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-maccatalyst)'
+Before:
+							return style;
+
+						if (readingName)
+						{
+							propertyName = reader.ReadIdent();
+							if (propertyName == null)
+								throw new Exception();
+						}
+						else
+							propertyValue = reader.ReadUntil(stopChar, ';', ':');
+						break;
+				}
+			}
+			return style;
+After:
+						{
+							return style;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.19041)'
+Before:
+							return style;
+
+						if (readingName)
+						{
+							propertyName = reader.ReadIdent();
+							if (propertyName == null)
+								throw new Exception();
+						}
+						else
+							propertyValue = reader.ReadUntil(stopChar, ';', ':');
+						break;
+				}
+			}
+			return style;
+After:
+						{
+							return style;
+*/
+
+/* Unmerged change from project 'Controls.Core(net8.0-windows10.0.20348)'
+Before:
+							return style;
+
+						if (readingName)
+						{
+							propertyName = reader.ReadIdent();
+							if (propertyName == null)
+								throw new Exception();
+						}
+						else
+							propertyValue = reader.ReadUntil(stopChar, ';', ':');
+						break;
+				}
+			}
+			return style;
+After:
+						{
+							return style;
+*/
+						{
+							return style;
+						}
+
+						if (readingName)
+						{
+							propertyName = reader.ReadIdent();
+							if (propertyName == null)
+							{
+								throw new Exception();
+							}
+						}
+						else
+						{
+							propertyValue = reader.ReadUntil(stopChar, ';', ':');
+						}
+
+						break;
+				}
+			}
+			return style;
+						}
+
+						if (readingName)
+						{
+							propertyName = reader.ReadIdent();
+							if (propertyName == null)
+							{
+								throw new Exception();
+							}
+						}
+						else
+						{
+							propertyValue = reader.ReadUntil(stopChar, ';', ':');
+						}
+
+						break;
+				}
+			}
+			return style;
 		}
 
 		public void Apply(VisualElement styleable, bool inheriting = false)
 		{
 			if (styleable == null)
+			{
 				throw new ArgumentNullException(nameof(styleable));
+			}
 
 			foreach (var decl in Declarations)
 			{
 				var property = ((IStylable)styleable).GetProperty(decl.Key, inheriting);
 				if (property == null)
+				{
 					continue;
+				}
+
 				if (string.Equals(decl.Value, "initial", StringComparison.OrdinalIgnoreCase))
+				{
 					//FIXME
 					styleable.ClearValue(property, new SetterSpecificity(SetterSpecificity.StyleImplicit, 0, 0, 0));
+				}
 				else
 				{
 					object value;
 					if (!convertedValues.TryGetValue(decl, out value))
+					{
 						convertedValues[decl] = (value = Convert(styleable, decl.Value, property));
+					}
 					//FIXME: compute distance
 					styleable.SetValue(property, value, new SetterSpecificity(SetterSpecificity.StyleImplicit, 0, 0, 0));
 				}
@@ -87,7 +230,10 @@ namespace Microsoft.Maui.Controls.StyleSheets
 			{
 				var ve = child as VisualElement;
 				if (ve == null)
+				{
 					continue;
+				}
+
 				Apply(ve, inheriting: true);
 			}
 		}
@@ -109,7 +255,10 @@ namespace Microsoft.Maui.Controls.StyleSheets
 						throw new XamlParseException($"Multiple properties with name '{property.DeclaringType}.{property.PropertyName}' found.", serviceProvider, innerException: e);
 					}
 					if (minfo != null)
+					{
 						return minfo;
+					}
+
 					try
 					{
 						return property.DeclaringType.GetRuntimeMethod("Get" + property.PropertyName, new[] { typeof(BindableObject) });
@@ -121,7 +270,10 @@ namespace Microsoft.Maui.Controls.StyleSheets
 				};
 			var ret = value.ConvertTo(property.ReturnType, minforetriever, serviceProvider, out Exception exception);
 			if (exception != null)
+			{
 				throw exception;
+			}
+
 			return ret;
 		}
 
